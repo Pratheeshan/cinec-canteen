@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap');
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 10px 40px rgba(14, 28, 60, 0.1);
+  }
+  
+  .header-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  .logo {
+    width: 80px;
+    height: auto;
+    margin-right: 20px;
+  }
+  
+  .nav-menu {
+    display: flex;
+    align-items: left;
+    background-color: #0E1C3C; /* Blue rectangle behind nav menu */
+    padding: 15px 50px;
+    border-radius: 5px;
+    margin-left: auto;
+    font-family: 'Jost', sans-serif;
+  }
+  
+  .nav-item {
+    margin: 0 10px;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .header-buttons {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+  }
+  .nav-button:hover {
+    background-color: #0E1C3C;
+  }
+  .nav-button {
+    background-color: #005993;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-button .icon {
+    height: 30px; /* Adjust as necessary */
+    width: 30px; /* Adjust as necessary */
+  }
+
+  @media screen and (max-width: 1225px) {
+    .header {
+      padding-left: var(--padding-112xl);
+      padding-right: var(--padding-147xl);
+      box-sizing: border-box;
+    }
+  }
+  @media screen and (max-width: 850px) {
+    .about-us-link {
+      display: none;
+    }
+    .header {
+      padding-left: var(--padding-46xl);
+      padding-right: var(--padding-64xl);
+      box-sizing: border-box;
+    }
+  }
+  @media screen and (max-width: 450px) {
+    .about-us-link {
+      padding-left: var(--padding-xl);
+      padding-right: var(--padding-xl);
+      box-sizing: border-box;
+    }
+  }
+  

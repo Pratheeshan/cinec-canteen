@@ -1,0 +1,139 @@
+/* General Styles */
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap');
+body {
+  font-family: 'Jost', sans-serif;
+}
+.register-page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+  background-image: url(/public/slider@3x.png);
+  background-size: cover;
+}
+
+.register-page .title-section,
+.register-page .form-section {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.register-page .title-section ,
+.register-page .form-section {
+  display: flex;
+  flex-direction: column;
+  display: relative;
+  justify-content: center;
+}
+.register-page .form-section .register-form{
+  background-color: #f5f6f7;
+}
+
+.register-page .register-title{
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-left: 50px;
+  color: #0E1C3C;
+  text-align: left;
+}
+.register-page .canteen-name {
+  font-size: 90px;
+  font-weight: bold;
+  color: #005993;
+  text-align: left;
+  margin-left: 50px;
+}
+
+
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.register-form {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+.form-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #0E1C3C;
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 10px 0;
+  align-items: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form-group.half-width {
+  flex: 0 0 48%;
+}
+
+.form-group label {
+  width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-align: left;
+  color: #000;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #dfdfdf;
+  box-sizing: border-box;
+}
+
+.register-button {
+  background-color: #005993;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 30%;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.register-button:hover {
+  background-color: #004080;
+}
+
+.form-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.form-footer a {
+  color: #005993;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}
