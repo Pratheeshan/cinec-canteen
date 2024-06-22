@@ -3,7 +3,7 @@
 body {
   font-family: 'Jost', sans-serif;
 }
-.register-page {
+.login {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -11,29 +11,27 @@ body {
   box-sizing: border-box;
   background-image: url(/public/slider@3x.png);
   background-size: cover;
-  width: 100%;
-  min-height: 100vh;
 }
 
-.register-page .title-section,
-.register-page .form-section {
+.login .title-section,
+.login .form-section {
   flex: 1;
   padding: 20px;
   box-sizing: border-box;
 }
 
-.register-page .title-section ,
-.register-page .form-section {
+.login .title-section ,
+.login .form-section {
   /* display: flex; */
   flex-direction: column;
   display: relative;
   justify-content: center;
 }
-.register-page .form-section .register-form{
+.login .form-section .register-form{
   background-color: #f5f6f7;
 }
 
-.register-page .register-title{
+.login .register-title{
   font-size: 48px;
   font-weight: bold;
   margin-bottom: 20px;
@@ -41,7 +39,7 @@ body {
   color: #0E1C3C;
   text-align: left;
 }
-.register-page .canteen-name {
+.login .canteen-name {
   font-size: 90px;
   font-weight: bold;
   color: #005993;
@@ -50,7 +48,7 @@ body {
 }
 
 
-.register-page {
+.login {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,24 +57,16 @@ body {
   box-sizing: border-box;
 }
 
-.register-form-signup {
-  background-color: white;
+.register-form {
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 85%;
-  text-align: center;
-  margin-top: -50px;
-}
-
-.form-title-root {
+  max-width: 600px;
   width: 100%;
-  align-items: center;
-  justify-content: center;
-  display: flex;
+  text-align: center;
 }
 
-.form-title-signup {
+.form-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
@@ -85,8 +75,6 @@ body {
   border-radius: 15px;
   padding: 10px 0;
   align-items: center;
-  width: 50%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
@@ -117,7 +105,7 @@ body {
   box-sizing: border-box;
 }
 
-.register-button {
+.login-button {
   background-color: #005993;
   color: white;
   padding: 15px;

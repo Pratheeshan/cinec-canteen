@@ -1,0 +1,194 @@
+body {
+    font-family: 'Jost', sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+.about-page {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+section {
+    margin-bottom: 50px;
+}
+
+h2 {
+    font-size: 28px;
+    color: #000;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 span {
+    color: #005993;
+}
+
+/* About Project Section */
+.about-project {
+    justify-content: center;
+    margin-left: 15%;
+    margin-right: 15%;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.project-image {
+    width: 400px;
+    height: auto;
+}
+
+.project-info h2 {
+    font-size: 48px;
+    font-weight: bold;
+    color: #0E1C3C;
+    text-align: left;
+}
+
+.project-info p {
+    font-size: 25px;
+    font-weight: 200;
+    color: #0E1C3C;
+    margin-right: 60px;
+    text-align: justify;
+}
+
+/* Technology Stack Section */
+.technology-stack h2 {
+    margin-bottom: 50px;
+}
+
+.technology-stack {
+    text-align: center;
+    background-color: #f0f0f0;
+    padding: 40px 20px;
+    border-radius: 15px;
+}
+
+.tech-cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.tech-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+}
+
+.tech-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.tech-card p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.tech-cards .tech-card .divservice-img1,
+.tech-cards .tech-card .divservice-img2,
+.tech-cards .tech-card .divservice-img3 {
+    height: 80px;
+    width: 80px;
+    margin-top: -50px;
+    margin-left: 35%;
+    box-shadow: 0 10px 25px rgba(14, 28, 60, 0.1);
+    border-radius: 50px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-11xl);
+    box-sizing: border-box;
+}
+
+.icon11png {
+    height: 40px;
+    width: 40px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+/* Meet Team Section */
+.meet-team {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.team-member {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 15%;
+    margin-right: 15%;
+    gap: 40px;
+}
+
+.member-info {
+    text-align: left;
+    flex: 1;
+}
+
+.member-image {
+    width: 200px;
+    height: auto;
+    border-radius: 15px;
+    margin-left: 20px;
+}
+
+.member-info h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.member-info p,
+.member-info ul {
+    font-size: 16px;
+    text-align: justify;
+
+}
+
+.get-to-know {
+    font-weight: 200;
+    color: #0E1C3C;
+    margin-bottom: 20px;
+}
+
+.name {
+    font-weight: 700;
+    color: #0E1C3C;
+    margin-bottom: 10px;
+}
+
+.mem-details {
+    padding: 0;
+    margin-left: 30px;
+}
+
+.mem-details li {
+    margin-bottom: 5px;
+}
+
+.mem-details span {
+    font-weight: 200;
+    color: #0E1C3C;
+}
+
+.member-info {
+    text-align: left;
+    flex: 2;
+}
+
+.member-image {
+    flex: 1;
+}

@@ -6,7 +6,9 @@
     align-items: center;
     padding: 20px;
     background-color: #fff;
-    box-shadow: 0 10px 40px rgba(14, 28, 60, 0.1);
+    box-shadow: 0 5px 40px rgba(14, 28, 60, 0.1);
+    border-bottom: 1px solid rgb(223, 222, 222);
+    margin-bottom: 30px;
   }
   
   .header-container {
@@ -41,7 +43,7 @@
   .header-buttons {
     display: flex;
     align-items: center;
-    margin: 10px;
+    margin: 5px;
   }
   .nav-button:hover {
     background-color: #0E1C3C;

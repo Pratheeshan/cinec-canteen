@@ -2,6 +2,14 @@ import React from "react";
 import "./Header.css";
 
 const Header = () => {
+
+  const loginOnClick = () => {
+    window.location.href = "/Login"
+  }
+  const aboutOnClick = () => {
+    window.location.href = "/About"
+  }
+
   return (
     <header className="header">
       <div className="header-container">
@@ -9,10 +17,10 @@ const Header = () => {
         <nav className="nav-menu">
           <a href="/" className="nav-item">Home</a>
           <a href="/menu" className="nav-item">Menu</a>
-          <a href="/about-us" className="nav-item">About Us</a>
+          <a href="/About" className="nav-item" onClick={aboutOnClick}>About Us</a>
         </nav>
         <div className="header-buttons">
-        <button className="nav-item nav-button">
+        <button className="nav-item nav-button" onClick={loginOnClick}>
             <img src='User.svg' alt="User" className="icon"/>
           </button>
           <button className="nav-item nav-button">
