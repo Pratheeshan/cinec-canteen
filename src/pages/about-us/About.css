@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap');
 body {
     font-family: 'Jost', sans-serif;
     background-color: #f8f8f8;
@@ -59,6 +60,8 @@ h2 span {
 /* Technology Stack Section */
 .technology-stack h2 {
     margin-bottom: 50px;
+    font-weight: bold;
+    
 }
 
 .technology-stack {
@@ -85,6 +88,7 @@ h2 span {
 .tech-card h3 {
     font-size: 20px;
     margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .tech-card p {

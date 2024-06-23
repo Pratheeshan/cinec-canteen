@@ -9,16 +9,22 @@ body {
   justify-content: space-between;
   padding: 20px;
   box-sizing: border-box;
-  background-image: url(/public/slider@3x.png);
+  background-image: url(/public/slider.png);
   background-size: cover;
   width: 100%;
   min-height: 100vh;
 }
 
 .register-page .title-section,
-.register-page .form-section {
+.register-page {
   flex: 1;
   padding: 20px;
+  box-sizing: border-box;
+}
+
+.form-section {
+  flex: 1;
+  padding: 20px 40px 20px 0px;
   box-sizing: border-box;
 }
 
@@ -64,7 +70,7 @@ body {
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 85%;
+  width: 100%;
   text-align: center;
   margin-top: -50px;
 }
@@ -113,7 +119,7 @@ body {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  background-color: #dfdfdf;
+  background-color: rgb(223, 223, 223);
   box-sizing: border-box;
 }
 

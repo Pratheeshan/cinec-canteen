@@ -9,7 +9,7 @@ body {
   justify-content: space-between;
   padding: 20px;
   box-sizing: border-box;
-  background-image: url(/public/slider@3x.png);
+  background-image: url(/public/slider.png);
   background-size: cover;
 }
 
@@ -135,4 +135,9 @@ body {
 
 .form-footer a:hover {
   text-decoration: underline;
+}
+
+.form-validation-mess {
+  color: red;
+  font-weight: 600;
 }
