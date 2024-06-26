@@ -1,18 +1,29 @@
 import React from 'react';
 import './Home.css';
+import FoodCard from '../../components/foodcard/FoodCard';
 
-const categories = [
-    { name: 'Meals', price: '200.00', image: 'food.jpg' },
-    { name: 'Soft Drinks', price: '160.00', image: 'food.jpg' },
-    { name: 'Short Eats', price: '100.00', image: 'food.jpg' },
-    { name: 'Ice Cream', price: '80.00', image: 'food.jpg' }
-  ];
+const allFoodItems = [
+    { id: 1, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
+    { id: 2, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
+    { id: 3, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'meal.jpg' },
+    { id: 4, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
+    { id: 5, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
+    { id: 6, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'meal.jpg' },
+    { id: 7, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
+    { id: 8, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
+    { id: 9, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'meal.jpg' },
+    { id: 10, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
+    { id: 11, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
+    { id: 12, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'meal.jpg' }
+
+];
+
 const Home = () => {
     return (
         <div className='home-page'>
             <section className="canteen-section">
                 <div className="canteen-text">
-                    <div className='home-title'>Welcome to <br/>the online</div>
+                    <div className='home-title'>Welcome to <br />the online</div>
                     <div className='home-subtitle'>CINEC Campus Canteen</div>
                     <div className="canteen-images">
                         <img src="image7.png" alt="Food Item 1" />
@@ -70,16 +81,16 @@ const Home = () => {
             </section>
             {/* Create account */}
             <section className="account-section">
-            <div className='accountroot'>
-                <img src="homeFrame.png" alt="Dish" className="project-image" />
-                <div className="account-info">
-                    <h2>Create Your <br />Canteen <span>Account  </span></h2>
-                    <p>
-                        Creating an account allows you to enjoy a seamless ordering experience, track your order history, and receive exclusive meal suggestions. Sign up now to unlock these benefits and start ordering your favorite meals with ease!
-                    </p>
-                    <a href="/Register" class="home-button">Create Account</a>
+                <div className='accountroot'>
+                    <img src="homeFrame.png" alt="Dish" className="project-image" />
+                    <div className="account-info">
+                        <h2>Create Your <br />Canteen <span>Account  </span></h2>
+                        <p>
+                            Creating an account allows you to enjoy a seamless ordering experience, track your order history, and receive exclusive meal suggestions. Sign up now to unlock these benefits and start ordering your favorite meals with ease!
+                        </p>
+                        <a href="/Register" class="home-button">Create Account</a>
+                    </div>
                 </div>
-            </div>
             </section>
 
             {/* Menu Categories */}
@@ -92,30 +103,151 @@ const Home = () => {
                     <button className="home-button">Explore Menu</button>
                 </div>
                 <div className="menu-items">
-                    {categories.map((category) => (
-                        <div className="menu-item" key={category.name}>
-                            <img src={category.image} alt={category.name} />
-                            <div className="menu-item-info">
-                                <span className="menu-item-price">Rs. {category.price}</span>
-                                <span className="menu-item-name">{category.name}</span>
+                    <div className="food-card">
+                        <div class="image-container">
+                            <span className="price">Rs. 200.00</span>
+                            <img src="meal.jpg" alt="Food" />
+                            <div className="info">
+                                <span className="category">Meals</span>
                             </div>
                         </div>
-                    ))}
+                    </div>
+                    <div className="food-card">
+                        <div class="image-container">
+                            <span className="price">Rs. 200.00</span>
+                            <img src="meal.jpg" alt="Food" />
+                            <div className="info">
+                                <span className="category">Meals</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="food-card">
+                        <div class="image-container">
+                            <span className="price">Rs. 200.00</span>
+                            <img src="meal.jpg" alt="Food" />
+                            <div className="info">
+                                <span className="category">Meals</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="food-card">
+                        <div class="image-container">
+                            <span className="price">Rs. 200.00</span>
+                            <img src="meal.jpg" alt="Food" />
+                            <div className="info">
+                                <span className="category">Meals</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
+            {/* Trending item menu */}
+            <section className='fooditems-row1'>
+                <div className="trendig-title">
+                    <h3>Canteen Favorites</h3>
+                    <h2>Explore Our <span>Trending Dish</span></h2>
+                </div>
+                <div className='food-cards'>
+                    {/* <div className="food-card">
+                        <div class="image-container">
+                            <span className="price">Rs. 200.00</span>
+                            <img src="meal.jpg" alt="Food" />
+                            <div className="info">
+                                <span className="category">Meals</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="food-card">
+                        <div class="image-container">
+                            <span className="price">Rs. 200.00</span>
+                            <img src="meal.jpg" alt="Food" />
+                            <div className="info">
+                                <span className="category">Meals</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="food-card">
+                        <div class="image-container">
+                            <span className="price">Rs. 200.00</span>
+                            <img src="meal.jpg" alt="Food" />
+                            <div className="info">
+                                <span className="category">Meals</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="food-card">
+                        <div class="image-container">
+                            <span className="price">Rs. 200.00</span>
+                            <img src="meal.jpg" alt="Food" />
+                            <div className="info">
+                                <span className="category">Meals</span>
+                            </div>
+                        </div>
+                    </div> */}
+                </div>
+            </section>
+            <section className='fooditems-row2'>
+                <div className='food-cards-home'>
+                    {/* <div className="food-card">
+                        <div class="image-container">
+                            <span className="price">Rs. 200.00</span>
+                            <img src="meal.jpg" alt="Food" />
+                            <div className="info">
+                                <span className="category">Meals</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="food-card">
+                        <div class="image-container">
+                            <span className="price">Rs. 200.00</span>
+                            <img src="meal.jpg" alt="Food" />
+                            <div className="info">
+                                <span className="category">Meals</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="food-card">
+                        <div class="image-container">
+                            <span className="price">Rs. 200.00</span>
+                            <img src="meal.jpg" alt="Food" />
+                            <div className="info">
+                                <span className="category">Meals</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="food-card">
+                        <div class="image-container">
+                            <span className="price">Rs. 200.00</span>
+                            <img src="meal.jpg" alt="Food" />
+                            <div className="info">
+                                <span className="category">Meals</span>
+                            </div>
+                        </div>
+                    </div> */}
+                    {
+                        allFoodItems.map(item => {
+                            return  <FoodCard />
+                        })
+                    }
+                </div>
+            </section>
+
+
+
             {/* Map to canteen */}
             <section className="account-section">
-            <div className='maproot'>
-                
-                <div className="account-info">
-                    <h2>Locate the <br /><span>Canteen </span></h2>
-                    <p>
-                    Find your way to the CINEC Campus Canteen with ease using our interactive map. Located at the heart of the campus. Use the map below to navigate to our location and enjoy a convenient dining experience.
-                    </p>
-                    <a href='https://maps.app.goo.gl/VNczpVw59CKWpG919' target='_blank'  rel="noreferrer" class="home-button">Navigate to Canteen</a>
-                                    </div>
-                <img src="map.png" alt="map" className="project-image" />
+                <div className='maproot'>
+
+                    <div className="account-info">
+                        <h2>Locate the <br /><span>Canteen </span></h2>
+                        <p>
+                            Find your way to the CINEC Campus Canteen with ease using our interactive map. Located at the heart of the campus. Use the map below to navigate to our location and enjoy a convenient dining experience.
+                        </p>
+
+                        <a href='https://maps.app.goo.gl/VNczpVw59CKWpG919' target='_blank' rel="noreferrer" class="home-button">Navigate to Canteen</a>
+                    </div>
+                    <img src="map.png" alt="map" className="project-image" />
                 </div>
             </section>
 

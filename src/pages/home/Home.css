@@ -202,45 +202,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-}
-
-.menu-item {
-  position: relative;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.menu-item img {
   width: 100%;
-  height: auto;
-  display: block;
-}
-
-.menu-item-info {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 5px;
-  padding: 5px 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.menu-item-price {
-  background-color: #ffffff;
-  border-radius: 5px;
-  padding: 2px 5px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 5px;
-}
-
-.menu-item-name {
-  font-size: 1.2rem;
-  color: #333;
 }
 
 /* map section */
@@ -267,9 +229,6 @@
     width: 100%;
   }
 
-  .menu-categories {
-    flex-direction: column;
-  }
 
   .menu-text, .menu-items {
     max-width: 100%;
@@ -280,11 +239,13 @@
     grid-template-columns: 1fr;
   }
 
-  .accountroot, .maproot {
+  .accountroot, .maproot, .menu-categories {
     flex-direction: column;
     margin: 0px;
     text-align: center;
-    margin: 0 5%;
+    margin: 0 2%;
+    padding: 0px;
+    margin-top: 50px;
   }
 
   .account-section .account-info, .project-image {
@@ -339,7 +300,37 @@
   }
 
   .account-info p {
-    padding: 0 10px;
     margin-right: 0px;
   }
+}
+
+
+.trendig-title h2 {
+  font-size: 30px;
+  font-weight: bold;
+  color: #0E1C3C;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.trendig-title h3 {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 50px;
+}
+
+.fooditems-row2 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* food items */
+.food-cards-home {
+  grid-template-columns: repeat(4, 1fr);
+    display: grid;
+    gap: 50px;
+    justify-content: center;
+    margin: 0% 15%;
 }
