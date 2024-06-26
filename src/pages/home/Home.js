@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Home.css';
 import FoodCard from '../../components/foodcard/FoodCard';
+
+import FoodCardPopup from '../../components/Popup model/FoodCardPopup';
 
 const allFoodItems = [
     { id: 1, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
@@ -18,7 +20,25 @@ const allFoodItems = [
 
 ];
 
+const FourFoodItems = [
+    { id: 1, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
+    { id: 2, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
+    { id: 3, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'meal.jpg' },
+    { id: 4, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
+
+];
+
 const Home = () => {
+    const [showFoodCardPopup, setShowFoodCardPopup] = useState(false)
+
+    const handleFoodCardOnClick = () => {
+        setShowFoodCardPopup(true)
+    }
+
+    const handleFoodCardPopupOnClick = () => {
+        setShowFoodCardPopup(false)
+    }
+
     return (
         <div className='home-page'>
             <section className="canteen-section">
@@ -103,42 +123,12 @@ const Home = () => {
                     <button className="home-button">Explore Menu</button>
                 </div>
                 <div className="menu-items">
-                    <div className="food-card">
-                        <div class="image-container">
-                            <span className="price">Rs. 200.00</span>
-                            <img src="meal.jpg" alt="Food" />
-                            <div className="info">
-                                <span className="category">Meals</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="food-card">
-                        <div class="image-container">
-                            <span className="price">Rs. 200.00</span>
-                            <img src="meal.jpg" alt="Food" />
-                            <div className="info">
-                                <span className="category">Meals</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="food-card">
-                        <div class="image-container">
-                            <span className="price">Rs. 200.00</span>
-                            <img src="meal.jpg" alt="Food" />
-                            <div className="info">
-                                <span className="category">Meals</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="food-card">
-                        <div class="image-container">
-                            <span className="price">Rs. 200.00</span>
-                            <img src="meal.jpg" alt="Food" />
-                            <div className="info">
-                                <span className="category">Meals</span>
-                            </div>
-                        </div>
-                    </div>
+                    {
+                        FourFoodItems.map((item, idx) => {
+                            return <FoodCard key={idx} item={item} onClick={handleFoodCardOnClick} />
+                        })
+                    }
+
                 </div>
             </section>
 
@@ -148,92 +138,16 @@ const Home = () => {
                     <h3>Canteen Favorites</h3>
                     <h2>Explore Our <span>Trending Dish</span></h2>
                 </div>
-                <div className='food-cards'>
-                    {/* <div className="food-card">
-                        <div class="image-container">
-                            <span className="price">Rs. 200.00</span>
-                            <img src="meal.jpg" alt="Food" />
-                            <div className="info">
-                                <span className="category">Meals</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="food-card">
-                        <div class="image-container">
-                            <span className="price">Rs. 200.00</span>
-                            <img src="meal.jpg" alt="Food" />
-                            <div className="info">
-                                <span className="category">Meals</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="food-card">
-                        <div class="image-container">
-                            <span className="price">Rs. 200.00</span>
-                            <img src="meal.jpg" alt="Food" />
-                            <div className="info">
-                                <span className="category">Meals</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="food-card">
-                        <div class="image-container">
-                            <span className="price">Rs. 200.00</span>
-                            <img src="meal.jpg" alt="Food" />
-                            <div className="info">
-                                <span className="category">Meals</span>
-                            </div>
-                        </div>
-                    </div> */}
-                </div>
             </section>
             <section className='fooditems-row2'>
                 <div className='food-cards-home'>
-                    {/* <div className="food-card">
-                        <div class="image-container">
-                            <span className="price">Rs. 200.00</span>
-                            <img src="meal.jpg" alt="Food" />
-                            <div className="info">
-                                <span className="category">Meals</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="food-card">
-                        <div class="image-container">
-                            <span className="price">Rs. 200.00</span>
-                            <img src="meal.jpg" alt="Food" />
-                            <div className="info">
-                                <span className="category">Meals</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="food-card">
-                        <div class="image-container">
-                            <span className="price">Rs. 200.00</span>
-                            <img src="meal.jpg" alt="Food" />
-                            <div className="info">
-                                <span className="category">Meals</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="food-card">
-                        <div class="image-container">
-                            <span className="price">Rs. 200.00</span>
-                            <img src="meal.jpg" alt="Food" />
-                            <div className="info">
-                                <span className="category">Meals</span>
-                            </div>
-                        </div>
-                    </div> */}
                     {
-                        allFoodItems.map(item => {
-                            return  <FoodCard />
+                        allFoodItems.map((item, idx) => {
+                            return <FoodCard key={idx} item={item} onClick={handleFoodCardOnClick} />
                         })
                     }
                 </div>
             </section>
-
-
 
             {/* Map to canteen */}
             <section className="account-section">
@@ -251,7 +165,7 @@ const Home = () => {
                 </div>
             </section>
 
-
+            <FoodCardPopup show={showFoodCardPopup} handleCancelOnClick={handleFoodCardPopupOnClick} />
         </div>
     );
 };
