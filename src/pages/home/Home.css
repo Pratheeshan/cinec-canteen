@@ -1,0 +1,345 @@
+.home-page {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+}
+.canteen-section {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 50px;
+  margin-top: 100px;
+}
+
+.home-page {
+  background-image: url('/public/slider.svg');
+  background-size: contain;
+  background-repeat: no-repeat, repeat;
+}
+
+.maproot, .accountroot {
+  justify-content: center;
+  margin: 0 15%;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 100px;
+  margin-top: 100px;
+}
+
+/* home top section */
+.home-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #0E1C3C;
+  text-align: left;
+}
+
+.home-subtitle {
+  font-size: 65px;
+  font-weight: bold;
+  color: #005993;
+  text-align: left;
+  line-height: 1;
+}
+
+.canteen-text {
+  max-width: 50%;
+  margin: 0 0 0 15%;
+}
+
+.canteen-images {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.canteen-images img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.canteen-image-main {
+  max-width: 50%;
+}
+
+.canteen-image-main img {
+  width: 80%;
+  height: auto;
+}
+
+/* features stack */
+.features-stack {
+  text-align: center;
+  padding: 40px 20px;
+  border-radius: 15px;
+  margin-bottom: 100px;
+}
+
+.feature-cards {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.feature-card {
+  background-color: #E6E8EB;
+  padding: 25px 30px 30px 30px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 25px 10px rgba(14, 28, 60, 0);
+  width: 100%;
+  max-width: 300px;
+}
+
+.feature-card h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.feature-card p {
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* create account */
+.account-info h2 {
+  font-size: 48px;
+  font-weight: bold;
+  color: #0E1C3C;
+  text-align: left;
+}
+
+.account-info p {
+  font-size: 20px;
+  font-weight: 200;
+  color: #0E1C3C;
+  margin-right: 60px;
+  text-align: justify;
+}
+
+.account-section .account-info {
+  width: 50%;
+}
+
+.account-section {
+  background-image: url('/public/greycircle.png');
+  background-size: contain;
+  background-repeat: no-repeat, repeat;
+}
+
+.home-button {
+  background-color: #005993;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.account-section .accountroot .account-info p {
+  margin-bottom: 30px;
+  margin-left: 0px;
+}
+
+/* menu categories */
+.menu-categories {
+  display: flex;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 100px;
+  margin: 0 15%;
+}
+
+.menu-text {
+  max-width: 40%;
+}
+
+.menu-text h1, .menu-text h2 {
+  margin: 0;
+  color: #0056b3;
+}
+
+.menu-text h1 {
+  font-size: 2rem;
+  font-weight: normal;
+}
+
+.menu-text h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.menu-text p {
+  font-size: 1rem;
+  color: #333;
+}
+
+.explore-button {
+  background-color: #0056b3;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.menu-items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.menu-item {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.menu-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.menu-item-info {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-item-price {
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 2px 5px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.menu-item-name {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* map section */
+.map-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 20px;
+}
+
+/* responsive styles */
+@media (max-width: 768px) {
+  .canteen-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .canteen-text, .canteen-image-main {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .canteen-image-main img {
+    width: 100%;
+  }
+
+  .menu-categories {
+    flex-direction: column;
+  }
+
+  .menu-text, .menu-items {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .menu-items {
+    grid-template-columns: 1fr;
+  }
+
+  .accountroot, .maproot {
+    flex-direction: column;
+    margin: 0px;
+    text-align: center;
+    margin: 0 5%;
+  }
+
+  .account-section .account-info, .project-image {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .features-stack {
+    padding: 20px 10px;
+  }
+
+  .feature-cards {
+    flex-direction: column;
+  }
+
+  .home-title {
+    font-size: 28px;
+  }
+
+  .home-subtitle {
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-title {
+    font-size: 24px;
+  }
+
+  .home-subtitle {
+    font-size: 36px;
+  }
+
+  .account-info h2 {
+    font-size: 1.5rem;
+  }
+
+  .menu-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .menu-text h2 {
+    font-size: 2rem;
+  }
+
+  .menu-item-price, .menu-item-name {
+    font-size: 1rem;
+  }
+
+  .account-info {
+    padding: 0 10px;
+  }
+
+  .account-info p {
+    padding: 0 10px;
+    margin-right: 0px;
+  }
+}

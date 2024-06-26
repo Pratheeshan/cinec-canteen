@@ -32,7 +32,7 @@ const Login = () => {
       <div className="form-section">
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <div className="register-form">
-          <div>
+          <div className='form-title-root'>
             <div className="form-title">Login</div>
           </div>
           <div className="form-group">
@@ -65,7 +65,7 @@ const Login = () => {
           </div>
           <button className="login-button" type='submit'>login</button>
           <div className="form-footer">
-            <p>Don't have an account</p>
+            <p>----------- Don't have an account -----------</p>
             <a href="/Register">Sign up</a>
           </div>
         </div>

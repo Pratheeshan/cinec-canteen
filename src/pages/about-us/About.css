@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap');
+
 body {
     font-family: 'Jost', sans-serif;
     background-color: #f8f8f8;
@@ -10,6 +11,7 @@ body {
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
+    margin-bottom: 20px;
 }
 
 section {
@@ -30,16 +32,18 @@ h2 span {
 /* About Project Section */
 .about-project {
     justify-content: center;
-    margin-left: 15%;
-    margin-right: 15%;
+    margin: 0 15%;
     display: flex;
     align-items: center;
     gap: 40px;
+    margin-bottom: 30px;
 }
 
 .project-image {
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     height: auto;
+    border-radius: 20 px;
 }
 
 .project-info h2 {
@@ -50,20 +54,17 @@ h2 span {
 }
 
 .project-info p {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 200;
     color: #0E1C3C;
     margin-right: 60px;
     text-align: justify;
 }
+.about-page .project-info{
+    width: 50%;
+  }
 
 /* Technology Stack Section */
-.technology-stack h2 {
-    margin-bottom: 50px;
-    font-weight: bold;
-    
-}
-
 .technology-stack {
     text-align: center;
     background-color: #f0f0f0;
@@ -71,10 +72,19 @@ h2 span {
     border-radius: 15px;
 }
 
+.technology-stack h2 {
+    margin-bottom: 50px;
+    font-weight: bold;
+    font-size: 28px;
+    color: #000;
+    text-align: center;
+}
+
 .tech-cards {
     display: flex;
     justify-content: center;
     gap: 40px;
+    flex-wrap: wrap;
 }
 
 .tech-card {
@@ -82,44 +92,38 @@ h2 span {
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 250px;
+    width: 100%;
+    max-width: 250px;
 }
 
 .tech-card h3 {
-    font-size: 20px;
+    font-size: 16px;
     margin-bottom: 10px;
     font-weight: bold;
 }
 
 .tech-card p {
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 12px;
+    line-height: 1;
 }
 
-.tech-cards .tech-card .divservice-img1,
-.tech-cards .tech-card .divservice-img2,
-.tech-cards .tech-card .divservice-img3 {
+.divservice-img1,
+.divservice-img2,
+.divservice-img3 {
     height: 80px;
     width: 80px;
-    margin-top: -50px;
-    margin-left: 35%;
+    margin: -50px auto 25px;
     box-shadow: 0 10px 25px rgba(14, 28, 60, 0.1);
     border-radius: 50px;
     background-color: white;
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: var(--padding-11xl);
-    box-sizing: border-box;
 }
 
 .icon11png {
     height: 40px;
     width: 40px;
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
 }
 
 /* Meet Team Section */
@@ -130,36 +134,38 @@ h2 span {
 
 .team-member {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column-reverse;
     align-items: center;
-    margin-left: 15%;
-    margin-right: 15%;
+    margin: 0 15%;
     gap: 40px;
+    text-align: center;
 }
 
 .member-info {
-    text-align: left;
+    text-align: center;
     flex: 1;
 }
 
 .member-image {
-    width: 200px;
+    width: 100%;
+    max-width: 400px;
     height: auto;
     border-radius: 15px;
-    margin-left: 20px;
+    margin: 0 auto 20px;
 }
 
 .member-info h2 {
     font-size: 28px;
     margin-bottom: 10px;
     text-align: left;
+    font-weight: bold;
+    color: #0E1C3C;
 }
 
 .member-info p,
 .member-info ul {
-    font-size: 16px;
+    font-size: 18px;
     text-align: justify;
-
 }
 
 .get-to-know {
@@ -176,7 +182,7 @@ h2 span {
 
 .mem-details {
     padding: 0;
-    margin-left: 30px;
+    list-style: none;
 }
 
 .mem-details li {
@@ -188,11 +194,121 @@ h2 span {
     color: #0E1C3C;
 }
 
-.member-info {
-    text-align: left;
-    flex: 2;
+@media (min-width: 769px) {
+    .about-project,
+    .team-member {
+        flex-direction: row;
+    }
+
+    .project-info {
+        text-align: left;
+    }
+
+    .member-info {
+        text-align: left;
+        flex: 2;
+    }
+
+    .member-image {
+        margin-left: 20px;
+        flex: 1;
+    }
+    .project-info{
+        width: 100%;
+
+    }
 }
 
-.member-image {
-    flex: 1;
+@media (max-width: 768px) {
+    .about-project {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    .about-page .project-info{
+        width: 100%;
+
+    }
+
+    .project-info h2 {
+        font-size: 32px;
+    }
+
+    .project-info p {
+        font-size: 18px;
+        margin-right: 0;
+    }
+
+    .technology-stack h2 {
+        font-size: 24px;
+    }
+
+    .tech-card {
+        width: 80%;
+    }
+
+    .team-member {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .member-info {
+        text-align: center;
+    }
+
+    .member-image {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-project {
+        margin: 0 5%;
+    }
+
+    .project-info h2 {
+        font-size: 24px;
+    }
+
+    .project-info p {
+        font-size: 16px;
+    }
+
+    .technology-stack {
+        padding: 20px 10px;
+    }
+
+    .technology-stack h2 {
+        font-size: 20px;
+    }
+
+    .tech-card {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 20px;
+    }
+
+    .tech-card h3 {
+        font-size: 18px;
+    }
+
+    .tech-card p {
+        font-size: 14px;
+    }
+
+    .team-member {
+        margin: 0 5%;
+    }
+
+    .member-info h2 {
+        font-size: 24px;
+    }
+
+    .member-info p,
+    .member-info ul {
+        font-size: 14px;
+    }
+    .project-image{
+        max-width: 300px;
+    }
 }

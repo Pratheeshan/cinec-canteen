@@ -8,17 +8,17 @@ const RegisterPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-      event.stopPropagation();
+    event.stopPropagation();
 
     setValidated(true);
   };
   return (
     <div className="register-page">
-      <div className="title-section">
+      <div className="title-section-register">
         <div className="register-title">Account Login/Register</div>
-        <div className="canteen-name">CINEC Campus Canteen</div>
+        <div className="reg-canteen-name">CINEC Campus Canteen</div>
       </div>
-      <div className="form-section">
+      <div className="rform-section">
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <div className="register-form-signup">
             <div className="form-title-root">
@@ -54,13 +54,13 @@ const RegisterPage = () => {
               <label>User ID <span>(Enter your Campus ID)</span></label>
               {/* <input type="text" name="user-id" required /> */}
               <Form.Control
-                  required
-                  type="text"
-                  style={{ width: "100%" }}
-                />
-                <Form.Control.Feedback type="invalid">
-                  Please enter the Campus ID.
-                </Form.Control.Feedback>
+                required
+                type="text"
+                style={{ width: "100%" }}
+              />
+              <Form.Control.Feedback type="invalid">
+                Please enter the Campus ID.
+              </Form.Control.Feedback>
             </div>
             <div className="form-group half-width">
               <div style={{ width: "48%" }}>
@@ -92,29 +92,29 @@ const RegisterPage = () => {
               <label>Email address</label>
               {/* <input type="email" name="email" required /> */}
               <Form.Control
-                  required
-                  type="email"
-                  style={{ width: "100%" }}
-                />
-                <Form.Control.Feedback type="invalid">
-                  Please enter the Email.
-                </Form.Control.Feedback>
+                required
+                type="email"
+                style={{ width: "100%" }}
+              />
+              <Form.Control.Feedback type="invalid">
+                Please enter the Email.
+              </Form.Control.Feedback>
             </div>
             <div className="form-group">
               <label>Phone Number <span>(WhatsApp Number)</span></label>
               {/* <input type="tel" name="contact-number" required /> */}
               <Form.Control
-                  required
-                  type="text"
-                  style={{ width: "100%" }}
-                />
-                <Form.Control.Feedback type="invalid">
-                  Please enter the Phone number.
-                </Form.Control.Feedback>
+                required
+                type="text"
+                style={{ width: "100%" }}
+              />
+              <Form.Control.Feedback type="invalid">
+                Please enter the Phone number.
+              </Form.Control.Feedback>
             </div>
             <button type="submit" className="register-button">Register</button>
             <div className="form-footer">
-              <p>I have an account</p>
+              <p>----------- I have an account -----------</p>
               <a href="/Login">Login</a>
             </div>
           </div>

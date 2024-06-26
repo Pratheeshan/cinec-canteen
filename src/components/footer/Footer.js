@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-container">
-        <img src='cineclogo.svg' alt="CINEC Logo" className="flogo" />
+      <a href="/"><img src='cineclogo.svg' alt="CINEC Logo" className="flogo" /></a>
         <nav className="footer-menu">
           <a href="/track-your-order" className="footer-item">Track your Order</a>
           <a href="/faq" className="footer-item">FAQ</a>
