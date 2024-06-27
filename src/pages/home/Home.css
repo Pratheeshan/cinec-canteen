@@ -145,6 +145,7 @@
   cursor: pointer;
   font-weight: bold;
   text-decoration: none;
+  margin-bottom: 15px;
 }
 
 .account-section .accountroot .account-info p {
@@ -162,7 +163,11 @@
   margin-bottom: 100px;
   margin: 0 15%;
 }
-
+.menu-categories .food-cards{
+  width: 100%;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0%;
+} 
 .menu-text {
   max-width: 40%;
 }

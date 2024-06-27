@@ -43,3 +43,39 @@
     border-radius: 20px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
 }
+
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+    .food-card {
+        max-width: 180px;
+    }
+}
+
+@media (max-width: 992px) {
+    .food-card {
+        max-width: 160px;
+    }
+}
+
+@media (max-width: 768px) {
+    .food-card {
+        max-width: 140px;
+    }
+}
+
+@media (max-width: 576px) {
+    .food-card {
+        max-width: 100px;
+    }
+
+    .price {
+        font-size: 12px;
+        padding: 3px 8px;
+    }
+
+    .category {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+}

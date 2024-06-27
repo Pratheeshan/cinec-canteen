@@ -12,11 +12,7 @@ const allFoodItems = [
     { id: 5, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
     { id: 6, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'meal.jpg' },
     { id: 7, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
-    { id: 8, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
-    { id: 9, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'meal.jpg' },
-    { id: 10, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
-    { id: 11, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
-    { id: 12, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'meal.jpg' }
+    { id: 8, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' }
 
 ];
 
@@ -120,17 +116,15 @@ const Home = () => {
                     <p>
                         Explore our delicious offerings for today! From hearty breakfast options to satisfying lunches and snacks, our menu is curated to delight your taste buds and keep you energized throughout the day.
                     </p>
-                    <button className="home-button">Explore Menu</button>
+                    <a href="/Menu" class="home-button">Create Account</a>
                 </div>
-                <div className="menu-items">
-                    {
-                        FourFoodItems.map((item, idx) => {
-                            return <FoodCard key={idx} item={item} onClick={handleFoodCardOnClick} />
-                        })
-                    }
-
+                <div className='food-cards'>
+                    {FourFoodItems.map((item, idx) => (
+                        <FoodCard key={idx} item={item}onClick={handleFoodCardOnClick} />
+                    ))}
                 </div>
             </section>
+          
 
             {/* Trending item menu */}
             <section className='fooditems-row1'>
@@ -139,13 +133,11 @@ const Home = () => {
                     <h2>Explore Our <span>Trending Dish</span></h2>
                 </div>
             </section>
-            <section className='fooditems-row2'>
-                <div className='food-cards-home'>
-                    {
-                        allFoodItems.map((item, idx) => {
-                            return <FoodCard key={idx} item={item} onClick={handleFoodCardOnClick} />
-                        })
-                    }
+            <section className='food-items'>
+                <div className='food-cards'>
+                    {allFoodItems.map((item, idx) => (
+                        <FoodCard key={idx} item={item}onClick={handleFoodCardOnClick} />
+                    ))}
                 </div>
             </section>
 

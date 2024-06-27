@@ -1,17 +1,53 @@
 import React, { useState } from "react";
+
 import "./Register.css";
 import Form from 'react-bootstrap/Form';
 
-
 const RegisterPage = () => {
   const [validated, setValidated] = useState(false);
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [userId, setUserId] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [email, setEmail] = useState("")
+  const [phoneNumber, setPhoneNumber] = useState("")
 
   const handleSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
 
     setValidated(true);
+
+    console.log(firstName, lastName, userId, password, confirmPassword, email, phoneNumber)
+
+    if (password === confirmPassword) {
+      // handle backend call here
+    } else {
+      // handle incorrect confirm password here
+    }
   };
+
+  const handleInputOnChange = (event) => {
+    switch (event.target.name) {
+      case "firstName" : setFirstName(event.target.value)
+                        break;
+      case "lastName" : setLastName(event.target.value)
+                        break;
+      case "userId" : setUserId(event.target.value)
+                        break;
+      case "password" : setPassword(event.target.value)
+                        break;
+      case "confirmPassword" : setConfirmPassword(event.target.value)
+                        break;
+      case "email" : setEmail(event.target.value)
+                        break;
+      case "phoneNumber" : setPhoneNumber(event.target.value)
+                        break;                 
+      default: return;
+    }
+  }
+
   return (
     <div className="register-page">
       <div className="title-section-register">
@@ -31,6 +67,9 @@ const RegisterPage = () => {
                 <Form.Control
                   required
                   type="text"
+                  name="firstName"
+                  value={firstName}
+                  onChange={handleInputOnChange}
                   style={{ width: "100%" }}
                 />
                 <Form.Control.Feedback type="invalid">
@@ -43,6 +82,9 @@ const RegisterPage = () => {
                 <Form.Control
                   required
                   type="text"
+                  name="lastName"
+                  value={lastName}
+                  onChange={handleInputOnChange}
                   style={{ width: "100%" }}
                 />
                 <Form.Control.Feedback type="invalid">
@@ -56,6 +98,9 @@ const RegisterPage = () => {
               <Form.Control
                 required
                 type="text"
+                name="userId"
+                value={userId}
+                onChange={handleInputOnChange}
                 style={{ width: "100%" }}
               />
               <Form.Control.Feedback type="invalid">
@@ -69,6 +114,9 @@ const RegisterPage = () => {
                 <Form.Control
                   required
                   type="password"
+                  name="password"
+                  value={password}
+                  onChange={handleInputOnChange}
                   style={{ width: "100%" }}
                 />
                 <Form.Control.Feedback type="invalid">
@@ -81,6 +129,9 @@ const RegisterPage = () => {
                 <Form.Control
                   required
                   type="password"
+                  name="confirmPassword"
+                  value={confirmPassword}
+                  onChange={handleInputOnChange}
                   style={{ width: "100%" }}
                 />
                 <Form.Control.Feedback type="invalid">
@@ -94,6 +145,9 @@ const RegisterPage = () => {
               <Form.Control
                 required
                 type="email"
+                name="email"
+                value={email}
+                onChange={handleInputOnChange}
                 style={{ width: "100%" }}
               />
               <Form.Control.Feedback type="invalid">
@@ -106,6 +160,9 @@ const RegisterPage = () => {
               <Form.Control
                 required
                 type="text"
+                name="phoneNumber"
+                value={phoneNumber}
+                onChange={handleInputOnChange}
                 style={{ width: "100%" }}
               />
               <Form.Control.Feedback type="invalid">

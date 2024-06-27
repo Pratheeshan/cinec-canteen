@@ -1,0 +1,60 @@
+
+.img{
+    height: 300px;
+    width: 300px;
+
+}
+.item-description{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.item-description p{
+    text-align: justify;
+}
+.quantity-input {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.quantity-input__modifier {
+    background-color: #f0f0f0;
+    border: none;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.quantity-input__modifier--left {
+    border-radius: 10px 0 0 10px;
+}
+
+.quantity-input__modifier--right {
+    border-radius: 0 10px 10px 0;
+}
+
+.quantity-input__screen {
+    width: 60px;
+    height: 40px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-right: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+.popup-item{
+    display: flex;
+}
+.button-section .home-button{
+    margin-left: 30px;
+    align-items: center;
+}
