@@ -6,7 +6,7 @@ const FoodCard = ({item, onClick}) => {
         <div className="food-card" onClick={onClick}>
             <div class="image-container">
                 <span className="price">{item.price}</span>
-                <img src="meal.jpg" alt="Food" />
+                <img src={item.image} alt="Food" />
                 <div className="info">
                     <span className="category">{item.label}</span>
                 </div>

@@ -14,13 +14,12 @@
 .quantity-input {
     display: flex;
     align-items: center;
-    justify-content: left;
     margin-top: 20px;
     margin-bottom: 20px;
+    
 }
 
 .quantity-input__modifier {
-    background-color: #f0f0f0;
     border: none;
     width: 40px;
     height: 40px;
@@ -30,7 +29,14 @@
     align-items: center;
     justify-content: center;
     user-select: none;
+    background-color: #005993;
+    color: white;
+    
 }
+.quantity-input__modifier:hover{
+    background-color: #0E1C3C;
+}
+
 
 .quantity-input__modifier--left {
     border-radius: 10px 0 0 10px;
@@ -44,7 +50,8 @@
     width: 60px;
     height: 40px;
     text-align: center;
-    border: 1px solid #ccc;
+    background-color: #D9D9D9;
+    border: none;
     border-left: none;
     border-right: none;
     user-select: none;
@@ -55,6 +62,50 @@
     display: flex;
 }
 .button-section .home-button{
-    margin-left: 30px;
+    margin-right: 30px;
     align-items: center;
+    background-color: #005993;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 25px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 15px;
+}
+.button-section .home-button:hover{
+    background-color: #0E1C3C;
+}
+.pop-price {
+    position: absolute;
+    justify-content: center;
+    margin-top: 15px;
+    margin-left: 8%;
+    background: white;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 576px){
+    .popup-item{
+        display: grid;
+    }
+    .img{
+        height: 150px;
+        width: 150px;
+    }
+    .pop-price{
+        margin-top: 15px;
+    margin-left: 0%;
+    top: 50px;
+    right: 40px;
+    }
+    .item-description{
+        margin: 25px 0px;
+    }
+    
 }

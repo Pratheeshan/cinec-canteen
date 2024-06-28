@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Home.css';
 import FoodCard from '../../components/foodcard/FoodCard';
-
 import FoodCardPopup from '../../components/Popup model/FoodCardPopup';
 
 const allFoodItems = [
@@ -13,27 +12,28 @@ const allFoodItems = [
     { id: 6, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'meal.jpg' },
     { id: 7, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
     { id: 8, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' }
-
 ];
 
 const FourFoodItems = [
     { id: 1, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
     { id: 2, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
     { id: 3, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'meal.jpg' },
-    { id: 4, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
-
+    { id: 4, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' }
 ];
 
 const Home = () => {
-    const [showFoodCardPopup, setShowFoodCardPopup] = useState(false)
+    const [showFoodCardPopup, setShowFoodCardPopup] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(null);
 
-    const handleFoodCardOnClick = () => {
-        setShowFoodCardPopup(true)
-    }
+    const handleFoodCardOnClick = (item) => {
+        setSelectedItem(item);
+        setShowFoodCardPopup(true);
+    };
 
     const handleFoodCardPopupOnClick = () => {
-        setShowFoodCardPopup(false)
-    }
+        setShowFoodCardPopup(false);
+        setSelectedItem(null);
+    };
 
     return (
         <div className='home-page'>
@@ -116,16 +116,15 @@ const Home = () => {
                     <p>
                         Explore our delicious offerings for today! From hearty breakfast options to satisfying lunches and snacks, our menu is curated to delight your taste buds and keep you energized throughout the day.
                     </p>
-                    <a href="/Menu" class="home-button">Create Account</a>
+                    <a href="/Menu" class="home-button">View Menu</a>
                 </div>
                 <div className='food-cards'>
                     {FourFoodItems.map((item, idx) => (
-                        <FoodCard key={idx} item={item}onClick={handleFoodCardOnClick} />
+                        <FoodCard key={idx} item={item} onClick={() => handleFoodCardOnClick(item)} />
                     ))}
                 </div>
             </section>
           
-
             {/* Trending item menu */}
             <section className='fooditems-row1'>
                 <div className="trendig-title">
@@ -136,7 +135,7 @@ const Home = () => {
             <section className='food-items'>
                 <div className='food-cards'>
                     {allFoodItems.map((item, idx) => (
-                        <FoodCard key={idx} item={item}onClick={handleFoodCardOnClick} />
+                        <FoodCard key={idx} item={item} onClick={() => handleFoodCardOnClick(item)} />
                     ))}
                 </div>
             </section>
@@ -144,23 +143,20 @@ const Home = () => {
             {/* Map to canteen */}
             <section className="account-section">
                 <div className='maproot'>
-
                     <div className="account-info">
                         <h2>Locate the <br /><span>Canteen </span></h2>
                         <p>
                             Find your way to the CINEC Campus Canteen with ease using our interactive map. Located at the heart of the campus. Use the map below to navigate to our location and enjoy a convenient dining experience.
                         </p>
-
                         <a href='https://maps.app.goo.gl/VNczpVw59CKWpG919' target='_blank' rel="noreferrer" class="home-button">Navigate to Canteen</a>
                     </div>
                     <img src="map.png" alt="map" className="project-image" />
                 </div>
             </section>
 
-            <FoodCardPopup show={showFoodCardPopup} handleCancelOnClick={handleFoodCardPopupOnClick} />
+            <FoodCardPopup show={showFoodCardPopup} handleCancelOnClick={handleFoodCardPopupOnClick} item={selectedItem} />
         </div>
     );
 };
-
 
 export default Home;
