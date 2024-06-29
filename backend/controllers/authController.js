@@ -3,9 +3,9 @@
 const userModel = require('../models/userModel');
 
 exports.login = (req, res) => {
-  const { username, password } = req.body;
+  const { userId, password } = req.body;
 
-  const user = userModel.findUser(username, password);
+  const user = userModel.findUser(userId, password);
 
   if (user) {
     res.status(200).json({ message: 'Login successful!' });

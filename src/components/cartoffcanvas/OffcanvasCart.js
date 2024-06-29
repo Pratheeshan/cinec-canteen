@@ -3,6 +3,8 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Button from 'react-bootstrap/Button';
 import './OffcanvasCart.css'
 
+import OffcanvasCartItem from './OffcanvasCartItem'
+
 const OffCanvasCart = ({ show, handleClose }) => {
   return (
     <Offcanvas show={show} onHide={handleClose} placement="end">
@@ -13,6 +15,7 @@ const OffCanvasCart = ({ show, handleClose }) => {
       </Offcanvas.Header>
       <Offcanvas.Body>
         Your cart is currently empty.
+        <OffcanvasCartItem />
       </Offcanvas.Body>
       <div className="offcanvas-footer">
         <Button className='home-button'>Checkout</Button>

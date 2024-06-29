@@ -4,7 +4,7 @@
   
   .offcanvas-title {
     text-align: center;
-    font-weight: bold;
+    font-weight: bold !important;
     color: #0E1C3C;
     width: 100%;
   }

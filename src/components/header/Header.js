@@ -4,6 +4,7 @@ import "./Header.css";
 import OffcanvasCart from '../cartoffcanvas/OffcanvasCart'
 
 const Header = () => {
+  // const { cartCount } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [showCartCanvas, setShowCartCanvas] = useState(false)
 
@@ -26,6 +27,7 @@ const Header = () => {
   const handleCloseCartCanvas = () => {
     setShowCartCanvas(false)
   }
+  
 
   return (
     <header className="header">
@@ -48,6 +50,7 @@ const Header = () => {
           </button>
           <button className="nav-item nav-button" onClick={handleShowCartCanvas}>
             <img src="cart.svg" alt="Cart" className="icon" />
+            {/* {cartCount > 0 && <span className="cart-count">{cartCount}</span>} */}
           </button>
         </div>
       </div>

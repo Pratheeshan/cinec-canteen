@@ -3,6 +3,10 @@ import React, { useState } from "react";
 import "./Register.css";
 import Form from 'react-bootstrap/Form';
 
+import {auth} from '../../config/Config'
+
+import {  createUserWithEmailAndPassword  } from 'firebase/auth';
+
 const RegisterPage = () => {
   const [validated, setValidated] = useState(false);
   const [firstName, setFirstName] = useState("")
@@ -22,11 +26,27 @@ const RegisterPage = () => {
     console.log(firstName, lastName, userId, password, confirmPassword, email, phoneNumber)
 
     if (password === confirmPassword) {
+      console.log("password and confirm password are equal")
       // handle backend call here
+      const data = {
+        email: email,
+        password: password
+      }
+      handleRegister(data)
     } else {
+      console.log("password and confirm password not equal")
       // handle incorrect confirm password here
     }
   };
+
+  const handleRegister = async(data) => {
+    try {
+      const response = await createUserWithEmailAndPassword(auth, data.email, data.password)
+      console.log(response)
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   const handleInputOnChange = (event) => {
     switch (event.target.name) {

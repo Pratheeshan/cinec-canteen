@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import "./Login.css";
 import Form from 'react-bootstrap/Form';
 
+import {  signInWithEmailAndPassword   } from 'firebase/auth';
+import { auth } from '../../config/Config';
+
 const Login = () => {
   const [validated, setValidated] = useState(false);
   const [userId, setUserId] = useState('')
@@ -13,7 +16,24 @@ const Login = () => {
     event.stopPropagation();
 
     setValidated(true);
+
+    const data = {
+      email: userId,
+      password: password
+    }
+
+    handleLoginApi(data)
   };
+
+  const handleLoginApi = async(data) => {
+    try {
+      console.log(data)
+      const response = await signInWithEmailAndPassword(auth, data.email, data.password)
+      console.log(response)
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   const handleUserIdOnChange = (e) => {
     setUserId(e.target.value)
