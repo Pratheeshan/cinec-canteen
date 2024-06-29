@@ -1,0 +1,38 @@
+.offcanvas-header {
+    background-color: #F2F2F2;
+  }
+  
+  .offcanvas-title {
+    text-align: center;
+    font-weight: bold;
+    color: #0E1C3C;
+    width: 100%;
+  }
+  
+  .offcanvas-footer {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    background-color: #F2F2F2;
+  }
+  
+  .offcanvas-footer button {
+    margin-right: 10px;
+   
+  }
+
+  
+  .offcanvas-footer .home-button{
+    align-items: center;
+    background-color: #005993;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 25px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}
+.offcanvas-footer .home-button:hover{
+    background-color: #0E1C3C;
+}

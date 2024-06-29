@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap');
 
-body {
+/* .menu-page {
     font-family: 'Jost', sans-serif;
     background-color: #f8f8f8;
     margin: 0;
@@ -8,11 +8,14 @@ body {
     background-image: url('/public/greycircle.png');
     background-size: contain;
     background-repeat: no-repeat, repeat;
-}
+} */
 
 .menu-page {
     padding: 20px;
     /* background-color: white; */
+    background-image: url('/public/greycircle.png');
+    background-size: contain;
+    background-repeat: no-repeat, repeat;
 }
 
 section.menu {

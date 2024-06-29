@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "./Header.css";
 
-const Header = ({ handleShowCart }) => {
+import OffcanvasCart from '../cartoffcanvas/OffcanvasCart'
+
+const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showCartCanvas, setShowCartCanvas] = useState(false)
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -11,10 +14,18 @@ const Header = ({ handleShowCart }) => {
   const loginOnClick = () => {
     window.location.href = "/Login";
   };
+
   const aboutOnClick = () => {
     window.location.href = "/About";
   };
 
+  const handleShowCartCanvas = () => {
+    setShowCartCanvas(true)
+  }
+
+  const handleCloseCartCanvas = () => {
+    setShowCartCanvas(false)
+  }
 
   return (
     <header className="header">
@@ -35,11 +46,12 @@ const Header = ({ handleShowCart }) => {
           <button className="nav-item nav-button" >
             <img src="Like.svg" alt="Wishlist" className="icon" />
           </button>
-          <button className="nav-item nav-button" onClick={handleShowCart}>
+          <button className="nav-item nav-button" onClick={handleShowCartCanvas}>
             <img src="cart.svg" alt="Cart" className="icon" />
           </button>
         </div>
       </div>
+      <OffcanvasCart show={showCartCanvas} handleClose = {handleCloseCartCanvas}/>
     </header>
   );
 };

@@ -12,13 +12,13 @@ const allFoodItems = [
     { id: 4, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'image7.png' },
     { id: 5, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'food2.png' },
     { id: 6, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'food2.png' },
-    { id: 7, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
+    { id: 7, category: 'Ice Cream', label: 'Ice Cream', price: 'Rs. 8.00', image: 'meal.jpg' },
     { id: 8, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
     { id: 9, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'food2.png' },
-    { id: 10, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
+    { id: 10, category: 'Hot Drink', label: 'Hot Drink', price: 'Rs. 200.00', image: 'meal.jpg' },
     { id: 11, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
-    { id: 12, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'meal.jpg' },
-    { id: 13, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'meal.jpg' }
+    { id: 12, category: 'Short Eats', label: 'Short Eats', price: 'Rs. 150.00', image: 'meal.jpg' },
+    { id: 13, category: 'Bun', label: 'Bun', price: 'Rs. 150.00', image: 'meal.jpg' }
 ];
 
 // Sample Menu Categories
