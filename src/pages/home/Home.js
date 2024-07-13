@@ -43,8 +43,8 @@ const Home = () => {
                     <div className='home-subtitle'>CINEC Campus Canteen</div>
                     <div className="canteen-images">
                         <img src="image7.png" alt="Food Item 1" />
-                        <img src="image7.png" alt="Food Item 2" />
-                        <img src="image7.png" alt="Food Item 3" />
+                        <img src="image 6.png" alt="Food Item 2" />
+                        <img src="image 5.png" alt="Food Item 3" />
                     </div>
                 </div>
                 <div className="canteen-image-main">
@@ -59,7 +59,7 @@ const Home = () => {
                             <img
                                 className="icon11png"
                                 alt=""
-                                src="icon11.svg"
+                                src="shopping.svg"
                             />
                         </div>
                         <h3>Efficient Ordering Process</h3>
@@ -72,7 +72,7 @@ const Home = () => {
                             <img
                                 className="icon11png"
                                 alt=""
-                                src="icon13.svg"
+                                src="qr-code-scan-icon.svg"
                             />
                         </div>
                         <h3>QR Oder Invoice</h3>
@@ -85,7 +85,7 @@ const Home = () => {
                             <img
                                 className="icon11png"
                                 alt=""
-                                src="icon12.svg"
+                                src="service.svg"
                             />
                         </div>
                         <h3>Customizable Options</h3>

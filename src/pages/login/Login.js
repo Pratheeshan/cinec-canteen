@@ -56,7 +56,7 @@ const Login = () => {
             <div className="form-title">Login</div>
           </div>
           <div className="form-group">
-            <label>User ID <span>(Enter your Campus ID)</span></label>
+            <label>Email Address</label>
             {/* <input type="text" name="user-id" required /> */}
             <Form.Control
             required
@@ -85,6 +85,7 @@ const Login = () => {
           </div>
           <button className="login-button" type='submit'>login</button>
           <div className="form-footer">
+          
             <p>----------- Don't have an account -----------</p>
             <a href="/Register">Sign up</a>
           </div>

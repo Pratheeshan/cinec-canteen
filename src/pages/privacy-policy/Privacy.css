@@ -1,0 +1,12 @@
+.privacy-page{
+    margin: 0% 20%;
+}
+.privacy-selection{
+    margin-bottom: 20px;
+}
+
+@media (max-width: 480px) {
+    .privacy-page{
+      margin: 0 5%;
+  }
+  }

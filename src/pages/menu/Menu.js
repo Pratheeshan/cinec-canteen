@@ -12,7 +12,7 @@ const allFoodItems = [
     { id: 4, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'image7.png' },
     { id: 5, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'food2.png' },
     { id: 6, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'food2.png' },
-    { id: 7, category: 'Ice Cream', label: 'Ice Cream', price: 'Rs. 8.00', image: 'meal.jpg' },
+    { id: 7, category: 'Ice Cream', label: 'Ice Cream', price: 'Rs. 80.00', image: 'meal.jpg' },
     { id: 8, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
     { id: 9, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'food2.png' },
     { id: 10, category: 'Hot Drink', label: 'Hot Drink', price: 'Rs. 200.00', image: 'meal.jpg' },
@@ -23,13 +23,13 @@ const allFoodItems = [
 
 // Sample Menu Categories
 const menuItems = [
-    { label: 'All Menu', iconSrc: '/icon11.png', className: 'm1' },
-    { label: 'Rice', iconSrc: '/icon11.png', className: 'm2' },
-    { label: 'Cool Drinks', iconSrc: '/icon11.png', className: 'm3' },
-    { label: 'Short Eats', iconSrc: '/icon11.png', className: 'm4' },
-    { label: 'Bun', iconSrc: '/icon11.png', className: 'm5' },
-    { label: 'Hot Drink', iconSrc: '/icon11.png', className: 'm51' },
-    { label: 'Ice Cream', iconSrc: '/icon11.png', className: 'm52' },
+    { label: 'All Menu', iconSrc: '/allmeal.svg', className: 'm1' },
+    { label: 'Rice', iconSrc: '/rice.svg', className: 'm2' },
+    { label: 'Cool Drinks', iconSrc: '/cooldrink.svg', className: 'm3' },
+    { label: 'Short Eats', iconSrc: '/shorteats.svg', className: 'm4' },
+    { label: 'Bun', iconSrc: '/bread.svg', className: 'm5' },
+    { label: 'Hot Drink', iconSrc: '/coffee.svg', className: 'm51' },
+    { label: 'Ice Cream', iconSrc: '/ice-cream-icon.svg', className: 'm52' },
 ];
 
 // Pagination Items

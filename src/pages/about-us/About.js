@@ -27,7 +27,7 @@ const About = () => {
                             <img
                                 className="icon11png"
                                 alt=""
-                                src="icon11.svg"
+                                src="website-ui-icon.svg"
                             />
                         </div>
                         <h3>Responsive Front-End Design</h3>
@@ -41,7 +41,7 @@ const About = () => {
                             <img
                                 className="icon11png"
                                 alt=""
-                                src="icon13.svg"
+                                src="database-line-icon.svg"
                             />
                         </div>
                         <h3>Data Management with Firebase</h3>
@@ -55,7 +55,7 @@ const About = () => {
                             <img
                                 className="icon11png"
                                 alt=""
-                                src="icon12.svg"
+                                src="py-file-icon.svg"
                             />
                         </div>
                         <h3>Python-Powered Predictive Analysis</h3>

@@ -1,4 +1,8 @@
-
+.OffcanvasCartItem .quantity-input {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    
+}
 .img{
     height: 300px;
     width: 300px;
@@ -18,6 +22,7 @@
     margin-bottom: 20px;
     
 }
+
 
 .quantity-input__modifier {
     border: none;

@@ -19,6 +19,7 @@ const Header = () => {
   const aboutOnClick = () => {
     window.location.href = "/About";
   };
+  
 
   const handleShowCartCanvas = () => {
     setShowCartCanvas(true)
@@ -44,9 +45,6 @@ const Header = () => {
         <div className="header-buttons">
           <button className="nav-item nav-button" onClick={loginOnClick}>
             <img src="User.svg" alt="User" className="icon" />
-          </button>
-          <button className="nav-item nav-button" >
-            <img src="Like.svg" alt="Wishlist" className="icon" />
           </button>
           <button className="nav-item nav-button" onClick={handleShowCartCanvas}>
             <img src="cart.svg" alt="Cart" className="icon" />

@@ -1,0 +1,21 @@
+.faq-page{
+    margin: 0% 25%;
+    height: 67vh;
+}
+
+.faq-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #0E1C3C;
+    text-align: center;
+  }
+  .faq-section{
+    margin-bottom: 20px;
+  }
+
+@media (max-width: 480px) {
+  .faq-page{
+    margin: 0 5%;
+}
+}
