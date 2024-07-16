@@ -176,6 +176,7 @@ section.menu {
     display: block;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
+    background: #f8f8f8;
 }
 
 .price {
@@ -187,7 +188,7 @@ section.menu {
     padding: 5px 10px;
     border-radius: 15px;
     font-weight: bold;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 4px 0.5px rgb(0 0 0 / 23%);
 }
 
 .info {
@@ -200,7 +201,7 @@ section.menu {
     background: white;
     padding: 15px 40px;
     border-radius: 20px;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive Food Cards */
