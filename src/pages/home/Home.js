@@ -5,21 +5,21 @@ import FoodCardPopup from '../../components/Popup model/FoodCardPopup';
 
 
 const allFoodItems = [
-    { id: 1, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
-    { id: 2, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
-    { id: 3, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'meal.jpg' },
-    { id: 4, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
-    { id: 5, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
-    { id: 6, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'meal.jpg' },
-    { id: 7, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
-    { id: 8, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' }
+    { id: 1, category: 'All Menu', name: 'Meals', price: 'Rs. 200.00', imageUrl: 'meal.jpg' },
+    { id: 2, category: 'Rice', name: 'Rice', price: 'Rs. 250.00', imageUrl: 'meal.jpg' },
+    { id: 3, category: 'Cool Drinks', name: 'Cool Drink', price: 'Rs. 150.00', imageUrl: 'meal.jpg' },
+    { id: 4, category: 'All Menu', name: 'Meals', price: 'Rs. 200.00', imageUrl: 'meal.jpg' },
+    { id: 5, category: 'Rice', name: 'Rice', price: 'Rs. 250.00', imageUrl: 'meal.jpg' },
+    { id: 6, category: 'Cool Drinks', name: 'Cool Drink', price: 'Rs. 150.00', imageUrl: 'meal.jpg' },
+    { id: 7, category: 'All Menu', name: 'Meals', price: 'Rs. 200.00', imageUrl: 'meal.jpg' },
+    { id: 8, category: 'Rice', name: 'Rice', price: 'Rs. 250.00', imageUrl: 'meal.jpg' }
 ];
 
 const FourFoodItems = [
-    { id: 1, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
-    { id: 2, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
-    { id: 3, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'meal.jpg' },
-    { id: 4, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' }
+    { id: 1, category: 'All Menu', name: 'Meals', price: 'Rs. 200.00', imageUrl: 'meal.jpg' },
+    { id: 2, category: 'Rice', name: 'Rice', price: 'Rs. 250.00', imageUrl: 'meal.jpg' },
+    { id: 3, category: 'Cool Drinks', name: 'Cool Drink', price: 'Rs. 150.00', imageUrl: 'meal.jpg' },
+    { id: 4, category: 'All Menu', name: 'Meals', price: 'Rs. 200.00', imageUrl: 'meal.jpg' }
 ];
 
 const Home = () => {

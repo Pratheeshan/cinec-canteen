@@ -7,12 +7,14 @@ import {  signInWithEmailAndPassword   } from 'firebase/auth';
 import { auth } from '../../config/Config';
 
 import { enqueueSnackbar } from 'notistack';
+import Loading from '../../components/loading/Loading'
 
 
 const Login = () => {
   const [validated, setValidated] = useState(false);
   const [userId, setUserId] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,27 +22,32 @@ const Login = () => {
 
     setValidated(true);
 
+    if (userId && password) {
     const data = {
       email: userId,
       password: password
     }
 
     handleLoginApi(data)
+  }
   };
 
   const handleLoginApi = async(data) => {
     try {
       console.log(data)
+      setLoading(true)
       const response = await signInWithEmailAndPassword(auth, data.email, data.password)
       console.log(response)
       if (response) {
         window.location.href = "/Dashboard"
         
       }
+      setLoading(false)
     } catch (e) {
       console.log(e)
       // enqueueSnackbar("Wrong Email Address or Password")
       enqueueSnackbar(`Login failed: Invalid Email or Password`, { variant: 'error' });
+      setLoading(false)
     }
   }
 
@@ -101,6 +108,7 @@ const Login = () => {
         </div>
         </Form>
       </div>
+      {loading && <Loading/>}
     </div>
   );
 };
