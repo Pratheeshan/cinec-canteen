@@ -1,0 +1,42 @@
+/* Orders.css */
+
+.orders-section {
+    background-color: #D9D9D9;
+  width:800px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 20px 20px 0;
+  padding: 25px 25px;
+  }
+  
+  .orders-section h2 {
+    margin-bottom: 20px;
+  }
+  
+  .table thead th {
+    background-color: #343a40;
+    color: white;
+  }
+  
+  .table tbody tr {
+    background-color: #1b2a47;
+    color: white;
+  }
+  
+  .table tbody tr .badge {
+    background-color: #2f855a;
+  }
+  
+  .dropdown-menu {
+    background-color: #343a40;
+    color: white;
+  }
+  
+  .dropdown-item {
+    color: white;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #495057;
+  }
+  

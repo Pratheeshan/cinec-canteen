@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "./Register.css";
 import Form from 'react-bootstrap/Form';
-
+import Loading from '../../components/loading/Loading';
 import {auth, db} from '../../config/Config'
 
 import {  createUserWithEmailAndPassword  } from 'firebase/auth';
