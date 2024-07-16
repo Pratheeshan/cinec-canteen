@@ -1,0 +1,29 @@
+/* Timetable.css */
+
+.timetable-section {
+    background-color: #D9D9D9;
+  width:800px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 20px 20px 0;
+  padding: 25px 25px;
+  }
+
+  
+  .table tbody tr {
+    vertical-align:middle;
+  }
+
+  .btn-primary {
+    background-color: #005993;
+    border:none;
+  }
+
+  .btn-primary:hover{
+    background-color: black;
+  }
+  .btn-success {
+    background-color: #2f855a;
+    border-color: #2f855a;
+  }
+  

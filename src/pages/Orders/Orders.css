@@ -8,27 +8,55 @@
   border-radius: 0 20px 20px 0;
   padding: 25px 25px;
   }
-  
-  .orders-section h2 {
-    margin-bottom: 20px;
+  .dash-title{
+    font-weight: bold;
+    font-size: 25px;
+    color: #0E1C3C;
   }
   
   .table thead th {
-    background-color: #343a40;
-    color: white;
+    background-color: #ffffff00;
+    color: #0E1C3C;
+    border-style: none;
+    border-color: #D9D9D9;
   }
   
   .table tbody tr {
-    background-color: #1b2a47;
+    background-color: #0E1C3C;
     color: white;
+    border-radius: 25px; /* Add border radius to table rows */
+    
   }
   
-  .table tbody tr .badge {
+  .table tbody td {
+    background-color: #0E1C3C;
+    color: white;
+    padding: 10px;
+    border: none;
+  }
+  
+  .table tbody tr:not(:last-child) {
+    margin-bottom: 5px;
+  }
+  
+  .table tbody tr td {
+    border: none;
+  }
+  
+  .table tbody .badge {
     background-color: #2f855a;
   }
   
+  
+
+/* filter dropdown */
+.dropdown-basic-button .dropdown-toggle {
+    background-color: #0E1C3C !important;
+    color: white !important;
+    border: none !important;
+  }
   .dropdown-menu {
-    background-color: #343a40;
+    background-color: #0E1C3C;
     color: white;
   }
   
@@ -37,6 +65,6 @@
   }
   
   .dropdown-item:hover {
-    background-color: #495057;
+    background-color: #005993;
   }
   

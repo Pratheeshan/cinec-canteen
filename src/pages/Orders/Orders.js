@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Table, Dropdown, DropdownButton, Badge } from 'react-bootstrap';
+import { Table, Dropdown, DropdownButton, Badge } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Orders.css'; // Ensure you have this file for additional styling
 
@@ -11,16 +11,28 @@ const sampleOrders = [
     status: 'Completed'
   },
   {
-    date: '23/05/2024',
-    menu: ['Rice & Curry', 'Sting', 'Ice-Cream'],
+    date: '20/05/2024',
+    menu: ['Rice & Curry', 'Ice-Cream'],
     totalPayment: 600,
     status: 'Completed'
   },
+  {
+    date: '16/05/2024',
+    menu: ['Rice & Curry', 'Sting', 'Ice-Cream'],
+    totalPayment: 600,
+    status: 'Pending'
+  },
+  {
+    date: '11/05/2024',
+    menu: ['Rice & Curry', 'Sting', 'Ice-Cream'],
+    totalPayment: 600,
+    status: 'Cancelled'
+  }
   // Add more sample orders as needed
 ];
 
 const Orders = () => {
-  const [orders, setOrders] = useState(sampleOrders);
+  const [orders,] = useState(sampleOrders);
   const [filter, setFilter] = useState('All');
 
   const handleFilterChange = (filter) => {
@@ -46,8 +58,8 @@ const Orders = () => {
   return (
     <div className="orders-section">
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2>Order Report</h2>
-        <DropdownButton id="dropdown-basic-button" title="Filter Order" onSelect={handleFilterChange}>
+        <div className='dash-title'>Order Report</div>
+        <DropdownButton className="dropdown-basic-button" title="Filter Order" onSelect={handleFilterChange}>
           <Dropdown.Item eventKey="All">All</Dropdown.Item>
           <Dropdown.Item eventKey="Completed">Completed</Dropdown.Item>
           <Dropdown.Item eventKey="Pending">Pending</Dropdown.Item>
@@ -63,7 +75,7 @@ const Orders = () => {
             <th>Status</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className='table-body'>
           {orders
             .filter(order => filter === 'All' || order.status === filter)
             .map((order, index) => (
