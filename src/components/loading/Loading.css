@@ -5,14 +5,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%; /* Full height */
+    height: 100vh; /* Full height */
     background-color: rgba(255, 255, 255, 0.636); /* Optional: for background overlay */
-    position: absolute;
-    width: 100%;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
   }
   
   p {

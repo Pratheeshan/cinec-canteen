@@ -19,7 +19,7 @@ const RegisterPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("")
   const [email, setEmail] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -29,33 +29,31 @@ const RegisterPage = () => {
 
     console.log(firstName, lastName, userId, password, confirmPassword, email, phoneNumber)
 
-    if (firstName && lastName && userId && password && confirmPassword && email && phoneNumber) {
-      if (password === confirmPassword) {
-        console.log("password and confirm password are equal")
-        // handle backend call here
-        const data = {
-          email: email,
-          password: password,
-          firstName,
-          lastName,
-          phoneNumber,
-          userId
-        }
-        handleRegister(data)
-      } else {
-        console.log("password and confirm password not equal")
-        enqueueSnackbar("password and confirm password not equal")
-        // handle incorrect confirm password here
+    if (password === confirmPassword) {
+      console.log("password and confirm password are equal")
+      // handle backend call here
+      const data = {
+        email: email,
+        password: password,
+        firstName,
+        lastName,
+        phoneNumber,
+        userId
       }
+      handleRegister(data)
+    } else {
+      console.log("password and confirm password not equal")
+      enqueueSnackbar("password and confirm password not equal")
+      // handle incorrect confirm password here
     }
   };
 
   const handleRegister = async(data) => {
     try {
-      setLoading(true);
       const response = await createUserWithEmailAndPassword(auth, data.email, data.password)
       console.log(response)
       if (response) {
+        setLoading(true);
         const res = await setDoc(doc(db, 'users', response.user.uid), {
           firstName: data.firstName,
           lastName: data.lastName,
@@ -74,10 +72,8 @@ const RegisterPage = () => {
         setEmail('')
         setPhoneNumber('')
       }
-      setLoading(false)
     } catch (e) {
       enqueueSnackbar('Registration Failed: Enter your details')
-      setLoading(false)
     }
   }
 
@@ -230,7 +226,6 @@ const RegisterPage = () => {
           </div>
         </Form>
       </div>
-      {loading && <Loading/>}
     </div>
   );
 };
