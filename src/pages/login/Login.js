@@ -6,6 +6,9 @@ import Form from 'react-bootstrap/Form';
 import {  signInWithEmailAndPassword   } from 'firebase/auth';
 import { auth } from '../../config/Config';
 
+import { enqueueSnackbar } from 'notistack';
+
+
 const Login = () => {
   const [validated, setValidated] = useState(false);
   const [userId, setUserId] = useState('')
@@ -30,8 +33,14 @@ const Login = () => {
       console.log(data)
       const response = await signInWithEmailAndPassword(auth, data.email, data.password)
       console.log(response)
+      if (response) {
+        window.location.href = "/Dashboard"
+        
+      }
     } catch (e) {
       console.log(e)
+      // enqueueSnackbar("Wrong Email Address or Password")
+      enqueueSnackbar(`Login failed: Invalid Email or Password`, { variant: 'error' });
     }
   }
 

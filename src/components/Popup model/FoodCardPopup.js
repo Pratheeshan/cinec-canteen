@@ -25,17 +25,17 @@ const FoodCardPopup = ({ show, handleCancelOnClick, item }) => {
         >
             <Modal.Header>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    <div><strong>{item.label}</strong></div>
+                    <div><strong>{item.name}</strong></div>
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <section className='popup-item'>
                     <div className='item-img'>
-                        <img src={item.image} alt={item.label} className='img' />
-                        <p className='pop-price'><strong>Price: </strong>Rs. {parseFloat(item.price.replace('Rs. ', '')) * quantity}</p>
+                        <img src={item.imageUrl} alt={item.name} className='img' />
+                        <p className='pop-price'><strong>Price: </strong>Rs. {parseFloat(item.price) * quantity}</p>
                     </div>
                     <div className='item-description'>
-                        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+                        <p> {item.description}</p>
                         
                         <div className="quantity-input">
                         <div> Set the quantity: </div>
@@ -45,9 +45,18 @@ const FoodCardPopup = ({ show, handleCancelOnClick, item }) => {
                         </div>
                         <div className='button-section'>
                         <div> Select break time: </div>
-                            <Button className='home-button'>Break 1</Button>
+                            {/* <Button className='home-button'>Break 1</Button>
                             <Button className='home-button'>Break 2</Button>
-                            <Button className='home-button'>Break 3</Button>
+                            <Button className='home-button'>Break 3</Button> */}
+                            <div>
+                            {
+                                item && item.breakTime && item.breakTime.map((i, idx) =>{
+                                    return <Button className='home-button' key = {idx}>
+                                        {`Break ${i}`}
+                                    </Button>
+                                })
+                            }
+                            </div>
                             <Button className='home-button'>Add to Cart</Button>
                             <Button className='home-button'>Buy now</Button>
                         </div>

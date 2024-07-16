@@ -5,6 +5,8 @@ import About from "../pages/about-us/About"
 import Menu from "../pages/menu/Menu"
 import FAQ from "../pages/faq/FAQ"
 import Privacy from "../pages/privacy-policy/Privacy"
+import Dashboard from "../pages/dashboard/Dashboard"
+
 
 const routes = {
     data: [
@@ -48,6 +50,12 @@ const routes = {
             name: "Privacy",
             path: "/Privacy",
             component: <Privacy/>,
+            type: "",
+        },
+        {
+            name: "Dashboard",
+            path: "/Dashboard",
+            component: <Dashboard/>,
             type: "",
         }
     ]

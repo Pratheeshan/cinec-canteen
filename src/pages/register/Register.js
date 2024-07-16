@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import "./Register.css";
 import Form from 'react-bootstrap/Form';
 
-import {auth} from '../../config/Config'
+import {auth, db} from '../../config/Config'
 
 import {  createUserWithEmailAndPassword  } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+
+import { enqueueSnackbar } from 'notistack';
 
 const RegisterPage = () => {
   const [validated, setValidated] = useState(false);
@@ -30,11 +33,16 @@ const RegisterPage = () => {
       // handle backend call here
       const data = {
         email: email,
-        password: password
+        password: password,
+        firstName,
+        lastName,
+        phoneNumber,
+        userId
       }
       handleRegister(data)
     } else {
       console.log("password and confirm password not equal")
+      enqueueSnackbar("password and confirm password not equal")
       // handle incorrect confirm password here
     }
   };
@@ -43,8 +51,27 @@ const RegisterPage = () => {
     try {
       const response = await createUserWithEmailAndPassword(auth, data.email, data.password)
       console.log(response)
+      if (response) {
+        const res = await setDoc(doc(db, 'users', response.user.uid), {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          phoneNumber: data.phoneNumber,
+          userId: data.userId,
+          createdAt: new Date(),
+        });
+        console.log(res)
+        enqueueSnackbar('Registration successful!', { variant: 'success' });
+        setFirstName('')
+        setLastName('')
+        setUserId('')
+        setPassword('')
+        setConfirmPassword('')
+        setEmail('')
+        setPhoneNumber('')
+      }
     } catch (e) {
-      console.log(e)
+      enqueueSnackbar(e)
     }
   }
 

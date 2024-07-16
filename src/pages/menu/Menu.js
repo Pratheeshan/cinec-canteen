@@ -1,25 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './Menu.css';
 import FoodCard from '../../components/foodcard/FoodCard';
 import FoodCardPopup from '../../components/Popup model/FoodCardPopup';
 import Pagination from 'react-bootstrap/Pagination';
 
+import { db } from '../../config/Config';
+import { collection, getDocs } from 'firebase/firestore';
+
+
 // Sample Data
-const allFoodItems = [
-    { id: 1, category: 'All Menu', label: 'Meals', price: 'Rs. 500.00', image: 'food2.png' },
-    { id: 2, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
-    { id: 3, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'meal.jpg' },
-    { id: 4, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'image7.png' },
-    { id: 5, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'food2.png' },
-    { id: 6, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'food2.png' },
-    { id: 7, category: 'Ice Cream', label: 'Ice Cream', price: 'Rs. 80.00', image: 'meal.jpg' },
-    { id: 8, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
-    { id: 9, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'food2.png' },
-    { id: 10, category: 'Hot Drink', label: 'Hot Drink', price: 'Rs. 200.00', image: 'meal.jpg' },
-    { id: 11, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
-    { id: 12, category: 'Short Eats', label: 'Short Eats', price: 'Rs. 150.00', image: 'meal.jpg' },
-    { id: 13, category: 'Bun', label: 'Bun', price: 'Rs. 150.00', image: 'meal.jpg' }
-];
+// const allFoodItems = [
+//     { id: 1, category: 'All Menu', label: 'Meals', price: 'Rs. 500.00', image: 'food2.png' },
+//     { id: 2, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
+//     { id: 3, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'meal.jpg' },
+//     { id: 4, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'image7.png' },
+//     { id: 5, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'food2.png' },
+//     { id: 6, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'food2.png' },
+//     { id: 7, category: 'Ice Cream', label: 'Ice Cream', price: 'Rs. 80.00', image: 'meal.jpg' },
+//     { id: 8, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
+//     { id: 9, category: 'Cool Drinks', label: 'Cool Drink', price: 'Rs. 150.00', image: 'food2.png' },
+//     { id: 10, category: 'Hot Drink', label: 'Hot Drink', price: 'Rs. 200.00', image: 'meal.jpg' },
+//     { id: 11, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },
+//     { id: 12, category: 'Short Eats', label: 'Short Eats', price: 'Rs. 150.00', image: 'meal.jpg' },
+//     { id: 13, category: 'Bun', label: 'Bun', price: 'Rs. 150.00', image: 'meal.jpg' }
+// ];
+
 
 // Sample Menu Categories
 const menuItems = [
@@ -32,6 +37,8 @@ const menuItems = [
     { label: 'Ice Cream', iconSrc: '/ice-cream-icon.svg', className: 'm52' },
 ];
 
+
+
 // Pagination Items
 const ITEMS_PER_PAGE = 8;
 
@@ -39,6 +46,26 @@ const Menu = () => {
     const [selectedCategory, setSelectedCategory] = useState('All Menu');
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedFoodItem, setSelectedFoodItem] = useState(null);
+    const [allFoodItems, setAllFoodItems] = useState([]);
+     const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchMeals = async () => {
+          setLoading(true);
+          try {
+            const mealsCollection = collection(db, 'meals');
+            const mealsSnapshot = await getDocs(mealsCollection);
+            const mealsList = mealsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            setAllFoodItems(mealsList);
+            console.log(mealsList)
+          } catch (error) {
+            console.error('Error fetching meals:', error);
+          }
+          setLoading(false);
+        };
+    
+        fetchMeals();
+      }, []);
 
     // Filtered Food Items based on the selected category
     const filteredFoodItems = selectedCategory === 'All Menu' ? allFoodItems : allFoodItems.filter(item => item.category === selectedCategory);
