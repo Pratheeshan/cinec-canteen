@@ -9,8 +9,10 @@ import { auth } from '../../config/Config';
 import { enqueueSnackbar } from 'notistack';
 import Loading from '../../components/loading/Loading'
 
+import {connect} from 'react-redux'
+import {storeLoginResponse} from '../../redux/actions/authAction'
 
-const Login = () => {
+const Login = ({storeLoginResponse}) => {
   const [validated, setValidated] = useState(false);
   const [userId, setUserId] = useState('')
   const [password, setPassword] = useState('')
@@ -39,8 +41,8 @@ const Login = () => {
       const response = await signInWithEmailAndPassword(auth, data.email, data.password)
       console.log(response)
       if (response) {
+        storeLoginResponse(response)
         window.location.href = "/Dashboard"
-        
       }
       setLoading(false)
     } catch (e) {
@@ -113,4 +115,11 @@ const Login = () => {
   );
 };
 
-export default Login;
+
+const mapDispatchToProps = dispatch => {
+  return {
+      storeLoginResponse: data => { dispatch(storeLoginResponse(data)) }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Login);

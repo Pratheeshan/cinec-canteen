@@ -5,7 +5,9 @@ import './OffcanvasCart.css'
 
 import OffcanvasCartItem from './OffcanvasCartItem'
 
-const OffCanvasCart = ({ show, handleClose }) => {
+import {connect} from 'react-redux'
+
+const OffCanvasCart = ({ show, handleClose, cartArray }) => {
   return (
     <Offcanvas show={show} onHide={handleClose} placement="end">
       <Offcanvas.Header className="offcanvas-header" >
@@ -15,10 +17,11 @@ const OffCanvasCart = ({ show, handleClose }) => {
       </Offcanvas.Header>
       <Offcanvas.Body>
         {
-          [1, 2, 3].map((i, idx, array) => {
+          cartArray && cartArray.map((i, idx, array) => {
             return (
               <>
-                <OffcanvasCartItem key={idx} />
+                {console.log(i)}
+                <OffcanvasCartItem key={idx} item = {i.item} selectedInitialQuantity = {i.quantity}/>
                 {idx < array.length - 1 && <div className='cart-item-divider' />}
               </>
             );
@@ -33,4 +36,8 @@ const OffCanvasCart = ({ show, handleClose }) => {
   );
 };
 
-export default OffCanvasCart;
+const mapStateToProps = state => ({
+  cartArray: state.cart.cart
+})
+
+export default connect(mapStateToProps)(OffCanvasCart);

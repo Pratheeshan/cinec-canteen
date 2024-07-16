@@ -3,7 +3,9 @@ import "./Header.css";
 
 import OffcanvasCart from '../cartoffcanvas/OffcanvasCart'
 
-const Header = () => {
+import {connect} from 'react-redux'
+
+const Header = ({cartArray}) => {
   // const { cartCount } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [showCartCanvas, setShowCartCanvas] = useState(false)
@@ -28,7 +30,6 @@ const Header = () => {
   const handleCloseCartCanvas = () => {
     setShowCartCanvas(false)
   }
-  
 
   return (
     <header className="header">
@@ -46,9 +47,9 @@ const Header = () => {
           <button className="nav-item nav-button" onClick={loginOnClick}>
             <img src="User.svg" alt="User" className="icon" />
           </button>
-          <button className="nav-item nav-button" onClick={handleShowCartCanvas}>
+          <button className="nav-item nav-button cart-button" onClick={handleShowCartCanvas}>
             <img src="cart.svg" alt="Cart" className="icon" />
-            {/* {cartCount > 0 && <span className="cart-count">{cartCount}</span>} */}
+            {cartArray && cartArray.length > 0 && <span className="cart-count">{cartArray.length}</span>}
           </button>
         </div>
       </div>
@@ -57,4 +58,8 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = state => ({
+  cartArray: state.cart.cart
+})
+
+export default connect(mapStateToProps)(Header);
