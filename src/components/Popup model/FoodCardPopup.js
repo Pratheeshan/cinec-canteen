@@ -3,7 +3,10 @@ import './FoodCardPopup.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-const FoodCardPopup = ({ show, handleCancelOnClick, item }) => {
+import {connect} from 'react-redux'
+import {addToCart} from '../../redux/actions/cartAction'
+
+const FoodCardPopup = ({ show, handleCancelOnClick, item, addToCart }) => {
     const [quantity, setQuantity] = useState(1);
 
     const increment = () => {
@@ -15,6 +18,15 @@ const FoodCardPopup = ({ show, handleCancelOnClick, item }) => {
     };
 
     if (!item) return null; // If no item is passed, return null
+
+    const addToCartFunction = () => {
+        const cartItem = {
+            item,
+            quantity
+        }
+
+        addToCart(cartItem)
+    }
 
     return (
         <Modal
@@ -57,7 +69,7 @@ const FoodCardPopup = ({ show, handleCancelOnClick, item }) => {
                                 })
                             }
                             </div>
-                            <Button className='home-button'>Add to Cart</Button>
+                            <Button className='home-button' onClick = {addToCartFunction}>Add to Cart</Button>
                             <Button className='home-button'>Buy now</Button>
                         </div>
                     </div>
@@ -70,4 +82,10 @@ const FoodCardPopup = ({ show, handleCancelOnClick, item }) => {
     );
 };
 
-export default FoodCardPopup;
+const mapDispatchToProps = dispatch => {
+    return {
+        addToCart: data => { dispatch(addToCart(data)) }
+    }
+  }
+  
+  export default connect(null, mapDispatchToProps)(FoodCardPopup);

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './OffcanvasCart.css'
 
 
 
-const OffcanvasCartItem = ({ item }) => {
-    const [quantity, setQuantity] = useState(1);
+const OffcanvasCartItem = ({ item, selectedInitialQuantity }) => {
+    const [quantity, setQuantity] = useState(selectedInitialQuantity);
 
     const increment = () => {
         setQuantity(prevQuantity => prevQuantity + 1);
@@ -14,7 +14,11 @@ const OffcanvasCartItem = ({ item }) => {
         setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
     };
 
-    if (!item) // If no item is passed, return null
+    useEffect(()=> {
+
+    }, [])
+
+    // if (!item) // If no item is passed, return null
 
 
         return (
@@ -22,19 +26,19 @@ const OffcanvasCartItem = ({ item }) => {
 
                 <div className='item-img'>
                     <a href="food.jpg">
-                        <img width="100" height="100" src="food.jpg" alt="" />
+                        <img width="100" height="100" src={item.imageUrl} alt="" />
                     </a>
                 </div>
                 <div>
                     <div className='item-description'>
                         <div>
                             <div className='test'>
-
                                 <b>Food Name - </b>
-                                Rs. {parseFloat(200) * quantity}
+                                {item.name}
                             </div>
                             <div>
-
+                                <b>Price - </b>
+                                Rs. {parseFloat(item.price) * quantity}
                             </div>
                         </div>
                         <div >

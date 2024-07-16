@@ -6,7 +6,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case "ADD_TO_CART": return {
             ...state,
-            cart: [...INITIAL_STATE, action.payload]
+            cart: [...state.cart, action.payload]
         }
 
         default: return state
