@@ -3,6 +3,7 @@ import './Home.css';
 import FoodCard from '../../components/foodcard/FoodCard';
 import FoodCardPopup from '../../components/Popup model/FoodCardPopup';
 
+
 const allFoodItems = [
     { id: 1, category: 'All Menu', label: 'Meals', price: 'Rs. 200.00', image: 'meal.jpg' },
     { id: 2, category: 'Rice', label: 'Rice', price: 'Rs. 250.00', image: 'meal.jpg' },

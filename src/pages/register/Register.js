@@ -7,7 +7,7 @@ import {auth, db} from '../../config/Config'
 
 import {  createUserWithEmailAndPassword  } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import Loading from '../../components/loading/Loading';
+
 import { enqueueSnackbar } from 'notistack';
 
 const RegisterPage = () => {
@@ -19,7 +19,6 @@ const RegisterPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("")
   const [email, setEmail] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
-  const [loading, setLoading] = useState(true);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -53,7 +52,6 @@ const RegisterPage = () => {
       const response = await createUserWithEmailAndPassword(auth, data.email, data.password)
       console.log(response)
       if (response) {
-        setLoading(true);
         const res = await setDoc(doc(db, 'users', response.user.uid), {
           firstName: data.firstName,
           lastName: data.lastName,
