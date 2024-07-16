@@ -7,14 +7,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { SnackbarProvider } from 'notistack';
 
+import {Provider} from 'react-redux'
+import {PersistGate} from 'redux-persist/integration/react'
+import {store, persistor} from './redux/store'
+
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-  <SnackbarProvider autoHideDuration={3000}>
-    <App />
-    </SnackbarProvider>
+    <Provider store = {store}>
+      <PersistGate persistor = {persistor}>
+      <SnackbarProvider autoHideDuration={3000}>
+        <App />
+      </SnackbarProvider>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>
 );
 
