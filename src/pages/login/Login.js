@@ -22,12 +22,14 @@ const Login = () => {
 
     setValidated(true);
 
+    if (userId && password) {
     const data = {
       email: userId,
       password: password
     }
 
     handleLoginApi(data)
+  }
   };
 
   const handleLoginApi = async(data) => {
