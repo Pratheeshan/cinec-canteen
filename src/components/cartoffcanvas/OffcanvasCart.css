@@ -1,9 +1,12 @@
 .trash-img{
   align-items: left;
+  cursor: pointer;
 }
+
 .popup-item{
   display: flex;
 }
+
 .offcanvas-header {
     background-color: #F2F2F2;
   }
