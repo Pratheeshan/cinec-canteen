@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './OffcanvasCart.css'
 
+import {connect} from 'react-redux'
+import {removeFromCart} from '../../redux/actions/cartAction'
 
-
-const OffcanvasCartItem = ({ item, selectedInitialQuantity }) => {
+const OffcanvasCartItem = ({ item, selectedInitialQuantity, removeFromCart }) => {
     const [quantity, setQuantity] = useState(selectedInitialQuantity);
 
     const increment = () => {
@@ -14,12 +15,14 @@ const OffcanvasCartItem = ({ item, selectedInitialQuantity }) => {
         setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
     };
 
-    useEffect(()=> {
-
-    }, [])
+    const handleDeleteOnClick = () => {
+        const cartItem = {
+            name: item.name
+        }
+        removeFromCart(cartItem)
+    }
 
     // if (!item) // If no item is passed, return null
-
 
         return (
             <section className='popup-item'>
@@ -49,18 +52,22 @@ const OffcanvasCartItem = ({ item, selectedInitialQuantity }) => {
                                 <button className="offquantity-input__modifier offquantity-input__modifier--right" onClick={increment}> &#xff0b; </button>
                             </div>
                                
-                                    <div className='trash-img'>
-                                        <img width="15" height="15" src="trash.svg" alt="" />
-                                    </div>
+                            <div className='trash-img' onClick={handleDeleteOnClick}>
+                                <img width="15" height="15" src="trash.svg" alt="" />
+                            </div>
                             
                         </div>
                     </div>
 
                 </div>
-
-
             </section>
         );
 };
 
-export default OffcanvasCartItem;
+const mapDispatchToProps = dispatch => {
+    return {
+        removeFromCart: data => { dispatch(removeFromCart(data)) }
+    }
+  }
+  
+export default connect(null, mapDispatchToProps)(OffcanvasCartItem);
