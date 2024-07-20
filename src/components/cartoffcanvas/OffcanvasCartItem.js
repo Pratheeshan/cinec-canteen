@@ -17,7 +17,7 @@ const OffcanvasCartItem = ({ item, selectedInitialQuantity, removeFromCart }) =>
 
     const handleDeleteOnClick = () => {
         const cartItem = {
-            name: item.name
+            id: item.id
         }
         removeFromCart(cartItem)
     }
@@ -26,7 +26,6 @@ const OffcanvasCartItem = ({ item, selectedInitialQuantity, removeFromCart }) =>
 
         return (
             <section className='popup-item'>
-
                 <div className='item-img'>
                     <a href="food.jpg">
                         <img width="100" height="100" src={item.imageUrl} alt="" />

@@ -16,7 +16,7 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard">
-            <Sidebar setActiveTabState = {setActiveTabState}/>
+            <Sidebar setActiveTabState = {setActiveTabState} activeTab = {activeTab}/>
             {
                 activeTab === 1 ? <DStats/> :
                 activeTab === 2 ? <Orders /> :
