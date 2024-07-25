@@ -40,7 +40,7 @@ const Home = () => {
         <div className='home-page'>
             <section className="canteen-section">
                 <div className="canteen-text">
-                    <div className='home-title'>Welcome to <br />the online</div>
+                    <div className='home-title'>Welcome to the online</div>
                     <div className='home-subtitle'>CINEC Campus Canteen</div>
                     <div className="canteen-images">
                         <img src="image7.png" alt="Food Item 1" />
