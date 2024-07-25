@@ -43,7 +43,9 @@ const Menu = () => {
     fetchMeals();
   }, []);
 
-  const filteredFoodItems = selectedCategory === 'All Menu' ? allFoodItems : allFoodItems.filter(item => item.category === selectedCategory);
+  const filteredFoodItems = selectedCategory === 'All Menu' 
+    ? allFoodItems 
+    : allFoodItems.filter(item => item.category === selectedCategory);
   const totalPages = Math.ceil(filteredFoodItems.length / ITEMS_PER_PAGE);
 
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
