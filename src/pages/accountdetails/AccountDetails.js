@@ -5,12 +5,10 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { updatePassword } from 'firebase/auth';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './AccountDetails.css';
-import Loading from '../../components/loading/Loading';
 
 const AccountDetails = () => {
   const [userDetails, setUserDetails] = useState(null);
   const [editing, setEditing] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
@@ -20,14 +18,12 @@ const AccountDetails = () => {
       if (userDoc.exists()) {
         setUserDetails(userDoc.data());
       }
-      setLoading(false);
     };
 
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         fetchUserDetails(user);
       } else {
-        setLoading(false);
       }
     });
 
@@ -48,7 +44,6 @@ const AccountDetails = () => {
 
   const handleSaveClick = async () => {
     setEditing(false);
-    setLoading(true);
     try {
       const user = auth.currentUser;
       if (user) {
@@ -56,18 +51,12 @@ const AccountDetails = () => {
         if (newPassword && newPassword === confirmNewPassword) {
           await updatePassword(user, newPassword);
         }
-        setLoading(false);
         window.location.reload(); // Reload the page after saving
       }
     } catch (error) {
       console.error('Error updating user details:', error);
-      setLoading(false);
     }
   };
-
-  if (loading) {
-    return <Loading />;
-  }
 
   return (
     <div className="account-details-section">

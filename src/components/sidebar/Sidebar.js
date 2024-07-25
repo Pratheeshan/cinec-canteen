@@ -30,6 +30,15 @@ const Sidebar = ({ setActiveTabState, activeTab }) => {
     // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+      // Optionally, redirect to the login page
+      window.location.href = '/login';
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
 
   return (
     <div className="sidebar">
@@ -61,7 +70,7 @@ const Sidebar = ({ setActiveTabState, activeTab }) => {
             <span className={`nav-dash ${activeTab === 3 ? 'active' : ''}`} onClick={() => setActiveTabState(3)}>Time Table</span>
             <span className={`nav-dash ${activeTab === 4 ? 'active' : ''}`} onClick={() => setActiveTabState(4)}>Account Details</span>
             <span className={`nav-dash ${activeTab === 5 ? 'active' : ''}`} onClick={() => setActiveTabState(5)}>Reviews/Feedback</span>
-            <a href="/logout" className="nav-dash" onClick={() => auth.signOut()}>Log out</a>
+            <a href="#!" className="nav-dash" onClick={handleLogout}>Log out</a>
           </nav>
         </>
       )}
