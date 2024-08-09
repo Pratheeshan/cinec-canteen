@@ -1,7 +1,7 @@
 import React from 'react';
-import './Dstats.css';
+import './AdminStats.css';
 
-const DStats = () => {
+const AdminStats = () => {
     return (
         <div className="dash">
             <div className="card">
@@ -36,4 +36,4 @@ const DStats = () => {
     );
 };
 
-export default DStats;
+export default AdminStats;

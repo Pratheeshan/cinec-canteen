@@ -6,6 +6,7 @@ import Menu from "../pages/menu/Menu"
 import FAQ from "../pages/faq/FAQ"
 import Privacy from "../pages/privacy-policy/Privacy"
 import Dashboard from "../pages/dashboard/Dashboard"
+import Admindash from "../pages/admindashboard/Admindash"
 
 
 const routes = {
@@ -57,7 +58,14 @@ const routes = {
             path: "/Dashboard",
             component: <Dashboard/>,
             type: "",
+        },
+        {
+            name: "AdminDashboard",
+            path: "/AdminDashboard",
+            component: <Admindash/>,
+            type: "",
         }
+
     ]
 }
 

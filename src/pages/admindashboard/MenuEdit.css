@@ -1,0 +1,126 @@
+/* MealEdit.css */
+
+/* Container for the meal edit section */
+.meal-edit-section {
+    background-color: #D9D9D9;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 20px 20px 0;
+    padding: 25px;
+    margin: 0px 10px 0px 0px;
+}
+
+/* Title styling */
+.dash-title {
+    font-weight: bold;
+    font-size: 25px;
+    color: #0E1C3C;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Table-like layout for the form */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #0E1C3C;
+    color: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Table header */
+table thead th {
+    background-color: #005993;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Table body */
+table tbody tr {
+    background-color: #0E1C3C;
+    border-bottom: 1px solid #005993;
+}
+
+table tbody td {
+    padding: 10px;
+    border: none;
+}
+
+/* Styling for the form inputs */
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #0E1C3C;
+    width: 100%;
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Break time group styling */
+.break-time-group {
+    display: flex;
+    gap: 10px;
+}
+
+.break-time-group label {
+    margin-right: 15px;
+}
+
+/* Button styling */
+button {
+    background-color: #005993;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #003d6a;
+}
+
+/* Add New button styling */
+.meal-edit-section button.add-new {
+    background-color: #0E1C3C;
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+}
+
+/* Ensure alignment for editable fields */
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    box-sizing: border-box;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .meal-edit-section {
+        width: 100%;
+        padding: 15px;
+    }
+    
+    table {
+        font-size: 14px;
+    }
+}

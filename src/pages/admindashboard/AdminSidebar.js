@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { auth, db } from '../../config/Config'; // Adjust the import path if needed
 import { doc, getDoc } from 'firebase/firestore';
-import './Sidebar.css';
+import './AdminSidebar.css';
 import Loading from '../../components/loading/Loading';
 
 const Sidebar = ({ setActiveTabState, activeTab }) => {
@@ -58,7 +58,7 @@ const Sidebar = ({ setActiveTabState, activeTab }) => {
                 <div className='user'>{userDetails.firstName} {userDetails.lastName}</div>
                 <div className='user'>{userDetails.userId}</div>
                 <div className='user'>{user.email}</div>
-                <p>{user.emailVerified ? 'Verified Account' : 'Student Account'}</p>
+                <p>{user.emailVerified ? 'Verified Account' : 'Admin Account'}</p>
               </>
             ) : (
               <>
@@ -73,8 +73,8 @@ const Sidebar = ({ setActiveTabState, activeTab }) => {
           <nav className="nav-dmenu">
             <span className={`nav-dash ${activeTab === 1 ? 'active' : ''}`} onClick={() => setActiveTabState(1)}>Dashboard</span>
             <span className={`nav-dash ${activeTab === 2 ? 'active' : ''}`} onClick={() => setActiveTabState(2)}>Orders</span>
-            <span className={`nav-dash ${activeTab === 3 ? 'active' : ''}`} onClick={() => setActiveTabState(3)}>Time Table</span>
-            <span className={`nav-dash ${activeTab === 4 ? 'active' : ''}`} onClick={() => setActiveTabState(4)}>Account Details</span>
+            <span className={`nav-dash ${activeTab === 3 ? 'active' : ''}`} onClick={() => setActiveTabState(3)}>Manage Stocks</span>
+            <span className={`nav-dash ${activeTab === 4 ? 'active' : ''}`} onClick={() => setActiveTabState(4)}>Manage Reviews</span>
             <span className={`nav-dash ${activeTab === 5 ? 'active' : ''}`} onClick={() => setActiveTabState(5)}>Reviews/Feedback</span>
             <a href="#!" className="nav-dash" onClick={handleLogout}>Log out</a>
           </nav>
