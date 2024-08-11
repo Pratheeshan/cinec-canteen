@@ -51,8 +51,9 @@ const AddMeal = ({ setIsAddingNew }) => {
   };
 
   return (
-    <div className="meal-edit-form">
-      <h3>Add New Meal</h3>
+    <div className="status-section">
+    <div className='meal-edit-form'>
+      <div className="dash-title">Add New Meal</div>
       <form onSubmit={handleSubmit}>
         <table>
           <tbody>
@@ -133,7 +134,7 @@ const AddMeal = ({ setIsAddingNew }) => {
                       checked={newMeal.breakTime.includes('1')}
                       onChange={handleCheckboxChange}
                     />
-                    1
+                    10.30 AM
                   </label>
                   <label>
                     <input
@@ -142,7 +143,7 @@ const AddMeal = ({ setIsAddingNew }) => {
                       checked={newMeal.breakTime.includes('2')}
                       onChange={handleCheckboxChange}
                     />
-                    2
+                    12.30 PM
                   </label>
                   <label>
                     <input
@@ -151,7 +152,7 @@ const AddMeal = ({ setIsAddingNew }) => {
                       checked={newMeal.breakTime.includes('3')}
                       onChange={handleCheckboxChange}
                     />
-                    3
+                    3.30 PM
                   </label>
                 </div>
               </td>
@@ -165,6 +166,7 @@ const AddMeal = ({ setIsAddingNew }) => {
           </tbody>
         </table>
       </form>
+      </div>
     </div>
   );
 };

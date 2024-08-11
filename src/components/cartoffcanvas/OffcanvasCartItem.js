@@ -4,7 +4,7 @@ import './OffcanvasCart.css'
 import {connect} from 'react-redux'
 import {removeFromCart} from '../../redux/actions/cartAction'
 
-const OffcanvasCartItem = ({ item, selectedInitialQuantity, removeFromCart }) => {
+const OffcanvasCartItem = ({ item, selectedInitialQuantity, removeFromCart,selectedBreakTimes  }) => {
     const [quantity, setQuantity] = useState(selectedInitialQuantity);
 
     const increment = () => {
@@ -44,6 +44,11 @@ const OffcanvasCartItem = ({ item, selectedInitialQuantity, removeFromCart }) =>
                             </div>
                         </div>
                         <div >
+                        <div>
+                    <b>Break Times: </b> {selectedBreakTimes && selectedBreakTimes.length > 0 
+                        ? selectedBreakTimes.join(', ') 
+                        : 'None'}
+                </div>
                             <div className="offquantity-input">
                                 <div > QTY: </div>
                                 <button className="offquantity-input__modifier offquantity-input__modifier--left"   onClick={decrement}>&mdash;</button>

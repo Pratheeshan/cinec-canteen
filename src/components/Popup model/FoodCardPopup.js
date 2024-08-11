@@ -8,6 +8,7 @@ import {addToCart} from '../../redux/actions/cartAction'
 
 const FoodCardPopup = ({ show, handleCancelOnClick, item, addToCart }) => {
     const [quantity, setQuantity] = useState(1);
+    const [selectedBreakTimes, setSelectedBreakTimes] = useState([]);
 
     const increment = () => {
         setQuantity(prevQuantity => prevQuantity + 1);
@@ -17,12 +18,23 @@ const FoodCardPopup = ({ show, handleCancelOnClick, item, addToCart }) => {
         setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
     };
 
+    const toggleBreakTime = (breakTime) => {
+        setSelectedBreakTimes(prev => {
+            if (prev.includes(breakTime)) {
+                return prev.filter(time => time !== breakTime); // Deselect if already selected
+            } else {
+                return [...prev, breakTime]; // Select if not already selected
+            }
+        });
+    };
+
     if (!item) return null; // If no item is passed, return null
 
     const addToCartFunction = () => {
         const cartItem = {
             item,
-            quantity
+            quantity,
+            breakTimes: selectedBreakTimes
         }
 
         addToCart(cartItem)
@@ -56,19 +68,17 @@ const FoodCardPopup = ({ show, handleCancelOnClick, item, addToCart }) => {
                             <button className="quantity-input__modifier quantity-input__modifier--right" onClick={increment}> &#xff0b; </button>
                         </div>
                         <div className='button-section'>
-                        <div> Select break time: </div>
-                            {/* <Button className='home-button'>Break 1</Button>
-                            <Button className='home-button'>Break 2</Button>
-                            <Button className='home-button'>Break 3</Button> */}
-                            <div>
-                            {
-                                item && item.breakTime && item.breakTime.map((i, idx) =>{
-                                    return <Button className='home-button' key = {idx}>
-                                        {`Break ${i}`}
-                                    </Button>
-                                })
-                            }
-                            </div>
+                        <div>
+                        {item.breakTime && item.breakTime.map((i, idx) => (
+                            <Button
+                                key={idx}
+                                className={`home-button ${selectedBreakTimes.includes(i) ? 'selected' : ''}`}
+                                onClick={() => toggleBreakTime(i)}
+                            >
+                                {`Break ${i}`}
+                            </Button>
+                        ))}
+                    </div>
                             <Button className='home-button' onClick = {addToCartFunction}>Add to Cart</Button>
                             <Button className='home-button'>Buy now</Button>
                         </div>

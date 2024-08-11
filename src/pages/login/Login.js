@@ -78,7 +78,7 @@ const Login = ({storeLoginResponse}) => {
             {/* <input type="text" name="user-id" required /> */}
             <Form.Control
             required
-              type="text"
+              type="email"
               placeholder=""
               value={userId}
               onChange={handleUserIdOnChange}

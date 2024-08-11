@@ -1,39 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Dropdown, DropdownButton, Badge } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Orders.css'; // Ensure you have this file for additional styling
-
-const sampleOrders = [
-  {
-    date: '23/05/2024',
-    menu: ['Chicken Rice', 'Coffee'],
-    totalPayment: 350,
-    status: 'Completed'
-  },
-  {
-    date: '20/05/2024',
-    menu: ['Rice & Curry', 'Ice-Cream'],
-    totalPayment: 600,
-    status: 'Completed'
-  },
-  {
-    date: '16/05/2024',
-    menu: ['Rice & Curry', 'Sting', 'Ice-Cream'],
-    totalPayment: 600,
-    status: 'Pending'
-  },
-  {
-    date: '11/05/2024',
-    menu: ['Rice & Curry', 'Sting', 'Ice-Cream'],
-    totalPayment: 600,
-    status: 'Cancelled'
-  }
-  // Add more sample orders as needed
-];
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../../config/Config'; // Adjust the import path as needed
 
 const Orders = () => {
-  const [orders,] = useState(sampleOrders);
+  const [orders, setOrders] = useState([]);
   const [filter, setFilter] = useState('All');
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        // Get user email from local storage
+        const userAuthData = JSON.parse(localStorage.getItem('persist:root')).auth;
+        const user = JSON.parse(userAuthData).authResponse.user;
+        const userEmail = user.email;
+
+        // Query to find the user document by email
+        const usersRef = collection(db, 'users');
+        const q = query(usersRef, where("email", "==", userEmail));
+        const querySnapshot = await getDocs(q);
+
+        let userDocId = null;
+
+        // Assuming there is only one document per user
+        querySnapshot.forEach((doc) => {
+          userDocId = doc.id;
+        });
+
+        if (!userDocId) {
+          throw new Error('User not found');
+        }
+
+        // Reference to the user's document in the users collection
+        const userDocRef = collection(db, 'users', userDocId, 'orders');
+
+        // Fetch orders
+        const ordersSnapshot = await getDocs(userDocRef);
+        const fetchedOrders = ordersSnapshot.docs.map(doc => doc.data());
+
+        // Update state with fetched orders
+        setOrders(fetchedOrders);
+
+      } catch (error) {
+        console.error("Error fetching orders: ", error);
+      }
+    };
+
+    fetchOrders();
+  }, []); // Empty dependency array means this useEffect runs once when the component mounts
 
   const handleFilterChange = (filter) => {
     setFilter(filter);
@@ -41,16 +57,33 @@ const Orders = () => {
   };
 
   const OrderItem = ({ order }) => {
+    const totalPayment = order.items.reduce((total, item) => total + item.price * item.quantity, 0);
+
+    // Format break times
+    const breakTimes = order.items
+      .flatMap(item => item.breakTimes)
+      .map((breakTime, index) => <div key={index}>{breakTime}</div>);
+
     return (
       <tr>
-        <td>{order.date}</td>
-        <td>{order.menu.join(', ')}</td>
-        <td>Rs. {order.totalPayment}</td>
+        <td>{order.date.toDate().toLocaleDateString()}</td>
+        <td>{order.items.map(item => item.name).join(', ')}</td>
+         <td>
+          {order.items.map(item => (
+            item.breakTimes && item.breakTimes.length > 0 ? (
+              item.breakTimes.map((bt, idx) => <div key={idx}>{bt}</div>)
+            ) : (
+              <div>No break times</div>
+            )
+          ))}
+        </td>
+        <td>Rs. {totalPayment}</td>
         <td>
-          <Badge bg={order.status === 'Completed' ? 'success' : order.status === 'Pending' ? 'warning' : 'danger'}>
-            {order.status}
+        <Badge bg={order.status === 'Completed' ? 'success' : order.status === 'Pending' ? 'warning' : 'danger'}>
+        {order.status}
           </Badge>
         </td>
+       
       </tr>
     );
   };
@@ -71,8 +104,10 @@ const Orders = () => {
           <tr>
             <th>Date</th>
             <th>Menu</th>
+            <th>Break Times</th>
             <th>Total Payment</th>
             <th>Status</th>
+           {/* New column for Break Times */}
           </tr>
         </thead>
         <tbody className='table-body'>

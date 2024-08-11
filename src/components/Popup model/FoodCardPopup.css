@@ -114,3 +114,7 @@
     }
     
 }
+.home-button.selected {
+    background-color: #031623; /* Change to a color that indicates selection */
+    color: white;
+}

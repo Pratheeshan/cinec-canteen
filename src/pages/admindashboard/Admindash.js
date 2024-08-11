@@ -5,8 +5,8 @@ import './Admindash.css';
 
 import Orders from '../Orders/Orders'
 import AccountDetails from '../accountdetails/AccountDetails';
-import Feedbacks from '../feedbacks/Feedbacks';
 import MenuEdit from './MenuEdit';
+import ViewFeeback from './ViewFeeback';
 
 const Admindash = () => {
     const [activeTab, setActiveTab] = useState(1)
@@ -22,7 +22,7 @@ const Admindash = () => {
                 activeTab === 2 ? <Orders /> :
                 activeTab === 3 ? <MenuEdit /> :
                 activeTab === 4 ? <AccountDetails /> :
-                activeTab === 5 ? <Feedbacks /> :
+                activeTab === 5 ? <ViewFeeback /> :
 
                 null
             }

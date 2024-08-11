@@ -1,0 +1,54 @@
+.admin-feedback {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+  }
+  
+  .admin-feedback h2 {
+    color: #0E1C3C;
+    margin-bottom: 20px;
+  }
+  
+  .admin-feedback table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .admin-feedback th, 
+  .admin-feedback td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .admin-feedback th {
+    background-color: #0E1C3C;
+    color: white;
+  }
+  
+  .admin-feedback tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .admin-feedback tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .admin-feedback button {
+    background-color: #0E1C3C;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin: 2px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .admin-feedback button:hover {
+    background-color: #005993;
+  }
+  

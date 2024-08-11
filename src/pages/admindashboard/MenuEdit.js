@@ -74,8 +74,8 @@ const MenuEdit = () => {
   };
 
   return (
-    <div className="meal-edit-section">
-      <h2 className="dash-title">Manage Meals</h2>
+    <div className="status-section">
+      <div className="dash-title">Manage Meals</div>
       {isAddingNew ? (
         <AddMeal setIsAddingNew={setIsAddingNew} />
       ) : (
