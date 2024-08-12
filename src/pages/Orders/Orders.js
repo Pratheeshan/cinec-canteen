@@ -59,31 +59,29 @@ const Orders = () => {
   const OrderItem = ({ order }) => {
     const totalPayment = order.items.reduce((total, item) => total + item.price * item.quantity, 0);
 
-    // Format break times
-    const breakTimes = order.items
-      .flatMap(item => item.breakTimes)
-      .map((breakTime, index) => <div key={index}>{breakTime}</div>);
+    const breakTimeMap = {
+      1: '10:30 AM',
+      2: '12:30 PM',
+      3: '3:30 PM'
+    };
 
     return (
       <tr>
         <td>{order.date.toDate().toLocaleDateString()}</td>
         <td>{order.items.map(item => item.name).join(', ')}</td>
-         <td>
-          {order.items.map(item => (
-            item.breakTimes && item.breakTimes.length > 0 ? (
-              item.breakTimes.map((bt, idx) => <div key={idx}>{bt}</div>)
-            ) : (
-              <div>No break times</div>
-            )
-          ))}
+        <td>
+          {order.items.flatMap(item => item.breakTimes || [])
+            .map((breakTime, index) => (
+              <div key={index}>{breakTimeMap[breakTime] || 'Unknown Time'}</div>
+            ))}
+          {order.items.every(item => !item.breakTimes || item.breakTimes.length === 0) && <div>No break times</div>}
         </td>
         <td>Rs. {totalPayment}</td>
         <td>
-        <Badge bg={order.status === 'Completed' ? 'success' : order.status === 'Pending' ? 'warning' : 'danger'}>
-        {order.status}
+          <Badge bg={order.status === 'Completed' ? 'success' : order.status === 'Pending' ? 'warning' : 'danger'}>
+            {order.status}
           </Badge>
         </td>
-       
       </tr>
     );
   };
@@ -104,10 +102,9 @@ const Orders = () => {
           <tr>
             <th>Date</th>
             <th>Menu</th>
-            <th>Break Times</th>
+            <th>Break Times</th> {/* New column for Break Times */}
             <th>Total Payment</th>
             <th>Status</th>
-           {/* New column for Break Times */}
           </tr>
         </thead>
         <tbody className='table-body'>
