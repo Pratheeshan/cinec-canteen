@@ -1,14 +1,21 @@
-import React from 'react';
+import React, {useState, useRef} from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Button from 'react-bootstrap/Button';
 import './OffcanvasCart.css';
 import { doc, collection, addDoc, serverTimestamp, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/Config'; // Import your Firebase configuration
 
+
 import OffcanvasCartItem from './OffcanvasCartItem';
 import { connect } from 'react-redux';
+import QRCode from 'react-qr-code';
+import emailjs from 'emailjs-com';
+
 
 const OffCanvasCart = ({ show, handleClose, cartArray }) => {
+  const [orderData, setOrderData] = useState(null)
+  const qrRef = useRef();
+
   const handleCheckout = async () => {
     if (!cartArray || cartArray.length === 0) {
       alert("Your cart is empty");
@@ -55,6 +62,7 @@ const OffCanvasCart = ({ show, handleClose, cartArray }) => {
           breakTimes: cartItem.breakTimes || [] // Include selected break times
         })),
       };
+      setOrderData(orderData.items)
       console.log(cartArray)
       // Add the order data to the orders subcollection
       await addDoc(ordersRef, orderData);
@@ -67,11 +75,29 @@ const OffCanvasCart = ({ show, handleClose, cartArray }) => {
       // Reload the page
       // window.location.reload();
 
+      // Send the email with QR code
+      sendEmailWithQRCode(userEmail, null);
+
       alert("Order placed successfully!");
     } catch (error) {
       console.error("Error placing order: ", error);
       alert("There was an error placing your order. Please try again.");
     }
+  };
+
+  const sendEmailWithQRCode = (userEmail, qrCodeURL) => {
+    const templateParams = {
+      to_email: 'pratheeshanv@gmail.com',
+      qr_code: qrCodeURL,
+    };
+
+    emailjs.send('service_j010obn', 'template_ae7u6en', templateParams, '8JEsvxeUkQApbKYML')
+      .then((response) => {
+        console.log('Email sent successfully!', response.status, response.text);
+      })
+      .catch((err) => {
+        console.error('Failed to send email. Error: ', err);
+      });
   };
 
   return (
@@ -94,6 +120,10 @@ const OffCanvasCart = ({ show, handleClose, cartArray }) => {
       <div className="offcanvas-footer">
         <Button className='home-button' onClick={handleCheckout}>Checkout</Button>
         <Button onClick={handleClose} className='home-button'>Close</Button>
+      </div>
+
+      <div style={{ display: 'none' }}>
+        <QRCode value={JSON.stringify(orderData)} ref={qrRef} />
       </div>
     </Offcanvas>
   );
