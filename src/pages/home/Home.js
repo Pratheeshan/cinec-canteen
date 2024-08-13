@@ -105,7 +105,7 @@ const Home = () => {
                         <p>
                             Creating an account allows you to enjoy a seamless ordering experience, track your order history, and receive exclusive meal suggestions. Sign up now to unlock these benefits and start ordering your favorite meals with ease!
                         </p>
-                        <a href="/Register" class="home-button">Create Account</a>
+                        <a href="/Register" className="home-button">Create Account</a>
                     </div>
                 </div>
             </section>
@@ -117,7 +117,7 @@ const Home = () => {
                     <p>
                         Explore our delicious offerings for today! From hearty breakfast options to satisfying lunches and snacks, our menu is curated to delight your taste buds and keep you energized throughout the day.
                     </p>
-                    <a href="/Menu" class="home-button">View Menu</a>
+                    <a href="/Menu" className="home-button">View Menu</a>
                 </div>
                 <div className='food-cards'>
                     {FourFoodItems.map((item, idx) => (
@@ -149,7 +149,7 @@ const Home = () => {
                         <p>
                             Find your way to the CINEC Campus Canteen with ease using our interactive map. Located at the heart of the campus. Use the map below to navigate to our location and enjoy a convenient dining experience.
                         </p>
-                        <a href='https://maps.app.goo.gl/VNczpVw59CKWpG919' target='_blank' rel="noreferrer" class="home-button">Navigate to Canteen</a>
+                        <a href='https://maps.app.goo.gl/VNczpVw59CKWpG919' target='_blank' rel="noreferrer" className="home-button">Navigate to Canteen</a>
                     </div>
                     <img src="map.png" alt="map" className="project-image" />
                 </div>
