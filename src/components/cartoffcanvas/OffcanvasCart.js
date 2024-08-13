@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Button from 'react-bootstrap/Button';
 import './OffcanvasCart.css';
@@ -8,14 +8,11 @@ import { db } from '../../config/Config'; // Import your Firebase configuration
 
 import OffcanvasCartItem from './OffcanvasCartItem';
 import { connect } from 'react-redux';
-import QRCode from 'react-qr-code';
+import QRCode from 'qrcode';
 import emailjs from 'emailjs-com';
 
 
 const OffCanvasCart = ({ show, handleClose, cartArray }) => {
-  const [orderData, setOrderData] = useState(null)
-  const qrRef = useRef();
-
   const handleCheckout = async () => {
     if (!cartArray || cartArray.length === 0) {
       alert("Your cart is empty");
@@ -62,7 +59,6 @@ const OffCanvasCart = ({ show, handleClose, cartArray }) => {
           breakTimes: cartItem.breakTimes || [] // Include selected break times
         })),
       };
-      setOrderData(orderData.items)
       console.log(cartArray)
       // Add the order data to the orders subcollection
       await addDoc(ordersRef, orderData);
@@ -75,8 +71,14 @@ const OffCanvasCart = ({ show, handleClose, cartArray }) => {
       // Reload the page
       // window.location.reload();
 
+      // Generate QR code as a Data URL
+      const qrCodeDataURL = await generateQRCode(JSON.stringify(orderData.items));
+      console.log(qrCodeDataURL)
+
+      const email = 'pratheeshanv@gmail.com'
+      const user_name = 'Pratheeshan'
       // Send the email with QR code
-      sendEmailWithQRCode(userEmail, null);
+      sendEmailWithQRCode(user_name, email, qrCodeDataURL);
 
       alert("Order placed successfully!");
     } catch (error) {
@@ -85,10 +87,15 @@ const OffCanvasCart = ({ show, handleClose, cartArray }) => {
     }
   };
 
-  const sendEmailWithQRCode = (userEmail, qrCodeURL) => {
+  const generateQRCode = (text) => {
+    return QRCode.toDataURL(text, { width: 256 });
+  };
+
+  const sendEmailWithQRCode = (user_name, userEmail, qrCodeURL) => {
     const templateParams = {
-      to_email: 'pratheeshanv@gmail.com',
-      qr_code: qrCodeURL,
+      user_name: user_name,
+      to_email: userEmail,
+      qr_code: `<img src="${qrCodeURL}" alt="QR Code" />`
     };
 
     emailjs.send('service_j010obn', 'template_ae7u6en', templateParams, '8JEsvxeUkQApbKYML')
@@ -120,10 +127,6 @@ const OffCanvasCart = ({ show, handleClose, cartArray }) => {
       <div className="offcanvas-footer">
         <Button className='home-button' onClick={handleCheckout}>Checkout</Button>
         <Button onClick={handleClose} className='home-button'>Close</Button>
-      </div>
-
-      <div style={{ display: 'none' }}>
-        <QRCode value={JSON.stringify(orderData)} ref={qrRef} />
       </div>
     </Offcanvas>
   );

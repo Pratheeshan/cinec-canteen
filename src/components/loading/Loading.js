@@ -5,7 +5,7 @@ import './Loading.css';
 const Loading = () => {
   return (
     <div className="loading-spinner">
-      <div class="lds-ripple"><div></div><div></div></div>
+      <div className="lds-ripple"><div></div><div></div></div>
       <p>Loading...</p>
     </div>
   );
