@@ -74,8 +74,7 @@ const Sidebar = ({ setActiveTabState, activeTab }) => {
             <span className={`nav-dash ${activeTab === 1 ? 'active' : ''}`} onClick={() => setActiveTabState(1)}>Dashboard</span>
             <span className={`nav-dash ${activeTab === 2 ? 'active' : ''}`} onClick={() => setActiveTabState(2)}>Manage Orders</span>
             <span className={`nav-dash ${activeTab === 3 ? 'active' : ''}`} onClick={() => setActiveTabState(3)}>Manage Stocks</span>
-            <span className={`nav-dash ${activeTab === 4 ? 'active' : ''}`} onClick={() => setActiveTabState(4)}>Manage Reviews</span>
-            <span className={`nav-dash ${activeTab === 5 ? 'active' : ''}`} onClick={() => setActiveTabState(5)}>Manage Reviews</span>
+            <span className={`nav-dash ${activeTab === 4 ? 'active' : ''}`} onClick={() => setActiveTabState(5)}>Manage Reviews</span>
             <a href="#!" className="nav-dash" onClick={handleLogout}>Log out</a>
           </nav>
         </>

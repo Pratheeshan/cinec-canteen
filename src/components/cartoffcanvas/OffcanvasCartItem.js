@@ -35,11 +35,11 @@ const OffcanvasCartItem = ({ item, selectedInitialQuantity, removeFromCart,selec
                     <div className='item-description'>
                         <div>
                             <div className='test'>
-                                <b>Food Name - </b>
+                                <b>Food Name: </b>
                                 {item.name}
                             </div>
                             <div>
-                                <b>Price - </b>
+                                <b>Price: </b>
                                 Rs. {parseFloat(item.price) * quantity}
                             </div>
                         </div>

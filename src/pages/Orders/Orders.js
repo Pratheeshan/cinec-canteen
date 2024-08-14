@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Dropdown, DropdownButton, Badge } from 'react-bootstrap';
+import { Table, Dropdown, DropdownButton, Badge, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Orders.css'; // Ensure you have this file for additional styling
 import { collection, getDocs, query, where } from 'firebase/firestore';
@@ -8,6 +8,7 @@ import { db } from '../../config/Config'; // Adjust the import path as needed
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [filter, setFilter] = useState('All');
+  const [selectedDate, setSelectedDate] = useState('');
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -38,7 +39,10 @@ const Orders = () => {
 
         // Fetch orders
         const ordersSnapshot = await getDocs(userDocRef);
-        const fetchedOrders = ordersSnapshot.docs.map(doc => doc.data());
+        let fetchedOrders = ordersSnapshot.docs.map(doc => doc.data());
+
+        // Sort orders by date (most recent first)
+        fetchedOrders = fetchedOrders.sort((a, b) => b.date.toDate() - a.date.toDate());
 
         // Update state with fetched orders
         setOrders(fetchedOrders);
@@ -47,13 +51,25 @@ const Orders = () => {
         console.error("Error fetching orders: ", error);
       }
     };
+    
 
     fetchOrders();
   }, []); // Empty dependency array means this useEffect runs once when the component mounts
 
   const handleFilterChange = (filter) => {
     setFilter(filter);
-    // Implement filter logic if needed
+  };
+
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
+  };
+
+  const filterOrders = (orders) => {
+    return orders.filter(order => {
+      const matchesStatus = filter === 'All' || order.status === filter;
+      const matchesDate = !selectedDate || order.date.toDate().toLocaleDateString() === new Date(selectedDate).toLocaleDateString();
+      return matchesStatus && matchesDate;
+    });
   };
 
   const OrderItem = ({ order }) => {
@@ -90,12 +106,20 @@ const Orders = () => {
     <div className="orders-section">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <div className='dash-title'>Order Report</div>
-        <DropdownButton className="dropdown-basic-button" title="Filter Order" onSelect={handleFilterChange}>
-          <Dropdown.Item eventKey="All">All</Dropdown.Item>
-          <Dropdown.Item eventKey="Completed">Completed</Dropdown.Item>
-          <Dropdown.Item eventKey="Pending">Pending</Dropdown.Item>
-          <Dropdown.Item eventKey="Cancelled">Cancelled</Dropdown.Item>
-        </DropdownButton>
+        <div className="d-flex">
+          <DropdownButton className="dropdown-basic-button" title="Filter Order" onSelect={handleFilterChange}>
+            <Dropdown.Item eventKey="All">All</Dropdown.Item>
+            <Dropdown.Item eventKey="Completed">Completed</Dropdown.Item>
+            <Dropdown.Item eventKey="Pending">Pending</Dropdown.Item>
+            <Dropdown.Item eventKey="Cancelled">Cancelled</Dropdown.Item>
+          </DropdownButton>
+          <Form.Control
+            type="date"
+            className="ml-2"
+            value={selectedDate}
+            onChange={handleDateChange}
+          />
+        </div>
       </div>
       <Table striped bordered hover responsive>
         <thead>
@@ -108,11 +132,9 @@ const Orders = () => {
           </tr>
         </thead>
         <tbody className='table-body'>
-          {orders
-            .filter(order => filter === 'All' || order.status === filter)
-            .map((order, index) => (
-              <OrderItem key={index} order={order} />
-            ))}
+          {filterOrders(orders).map((order, index) => (
+            <OrderItem key={index} order={order} />
+          ))}
         </tbody>
       </Table>
     </div>

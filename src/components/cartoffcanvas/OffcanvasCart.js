@@ -95,7 +95,7 @@ const OffCanvasCart = ({ show, handleClose, cartArray }) => {
     const templateParams = {
       user_name: user_name,
       to_email: userEmail,
-      qr_code: `<img src="${qrCodeURL}" alt="QR Code" />`
+      qr_code: qrCodeURL, // Pass the data URL here
     };
 
     emailjs.send('service_j010obn', 'template_ae7u6en', templateParams, '8JEsvxeUkQApbKYML')

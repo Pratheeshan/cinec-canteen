@@ -1,65 +1,69 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import "./Login.css";
 import Form from 'react-bootstrap/Form';
-
-import {  signInWithEmailAndPassword   } from 'firebase/auth';
+import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../config/Config';
-
 import { enqueueSnackbar } from 'notistack';
-import Loading from '../../components/loading/Loading'
+import Loading from '../../components/loading/Loading';
+import { connect } from 'react-redux';
+import { storeLoginResponse } from '../../redux/actions/authAction';
 
-import {connect} from 'react-redux'
-import {storeLoginResponse} from '../../redux/actions/authAction'
-
-const Login = ({storeLoginResponse}) => {
+const Login = ({ storeLoginResponse }) => {
   const [validated, setValidated] = useState(false);
-  const [userId, setUserId] = useState('')
-  const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [userId, setUserId] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // Check if the user is already logged in
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, redirect to dashboard
+        window.location.href = "/Dashboard";
+      }
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
-
     setValidated(true);
 
     if (userId && password) {
-    const data = {
-      email: userId,
-      password: password
+      const data = {
+        email: userId,
+        password: password
+      };
+      handleLoginApi(data);
     }
-
-    handleLoginApi(data)
-  }
   };
 
-  const handleLoginApi = async(data) => {
+  const handleLoginApi = async (data) => {
     try {
-      console.log(data)
-      setLoading(true)
-      const response = await signInWithEmailAndPassword(auth, data.email, data.password)
-      console.log(response)
+      setLoading(true);
+      const response = await signInWithEmailAndPassword(auth, data.email, data.password);
       if (response) {
-        storeLoginResponse(response)
-        window.location.href = "/Dashboard"
+        storeLoginResponse(response);
+        window.location.href = "/Dashboard";
       }
-      setLoading(false)
+      setLoading(false);
     } catch (e) {
-      console.log(e)
-      // enqueueSnackbar("Wrong Email Address or Password")
+      console.log(e);
       enqueueSnackbar(`Login failed: Invalid Email or Password`, { variant: 'error' });
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleUserIdOnChange = (e) => {
-    setUserId(e.target.value)
-  }
+    setUserId(e.target.value);
+  };
 
   const handlePasswordOnChange = (e) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
 
   return (
     <div className="login">
@@ -68,58 +72,54 @@ const Login = ({storeLoginResponse}) => {
         <div className="canteen-name">CINEC Campus Canteen</div>
       </div>
       <div className="form-section">
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <div className="register-form">
-          <div className='form-title-root'>
-            <div className="form-title">Login</div>
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <div className="register-form">
+            <div className='form-title-root'>
+              <div className="form-title">Login</div>
+            </div>
+            <div className="form-group">
+              <label>Email Address</label>
+              <Form.Control
+                required
+                type="email"
+                placeholder=""
+                value={userId}
+                onChange={handleUserIdOnChange}
+              />
+              <Form.Control.Feedback type="invalid">
+                Please enter the email address.
+              </Form.Control.Feedback>
+            </div>
+            <div className="form-group half-width">
+              <label>Password</label>
+              <Form.Control
+                required
+                type="password"
+                placeholder=""
+                value={password}
+                onChange={handlePasswordOnChange}
+              />
+              <Form.Control.Feedback type="invalid">
+                Please enter the password.
+              </Form.Control.Feedback>
+            </div>
+            <button className="login-button" type='submit'>Login</button>
+            <div className="form-footer">
+              <p>----------- Don't have an account -----------</p>
+              <a href="/Register">Sign up</a>
+            </div>
           </div>
-          <div className="form-group">
-            <label>Email Address</label>
-            {/* <input type="text" name="user-id" required /> */}
-            <Form.Control
-            required
-              type="email"
-              placeholder=""
-              value={userId}
-              onChange={handleUserIdOnChange}
-            />
-            <Form.Control.Feedback type="invalid">
-                  Please enter the userId.
-                </Form.Control.Feedback>
-          </div>
-          <div className="form-group half-width">
-            <label>Password</label>
-            {/* <input type="password" name="password" required /> */}
-            <Form.Control
-            required
-              type="password"
-              placeholder=""
-              value={password}
-              onChange={handlePasswordOnChange}
-            />
-            <Form.Control.Feedback type="invalid">
-                  Please enter the password.
-                </Form.Control.Feedback>
-          </div>
-          <button className="login-button" type='submit'>login</button>
-          <div className="form-footer">
-          
-            <p>----------- Don't have an account -----------</p>
-            <a href="/Register">Sign up</a>
-          </div>
-        </div>
         </Form>
       </div>
-      {loading && <Loading/>}
+      {loading && <Loading />}
     </div>
   );
 };
 
-
 const mapDispatchToProps = dispatch => {
   return {
-      storeLoginResponse: data => { dispatch(storeLoginResponse(data)) }
-  }
-}
+    storeLoginResponse: data => { dispatch(storeLoginResponse(data)) }
+  };
+};
 
 export default connect(null, mapDispatchToProps)(Login);

@@ -38,6 +38,8 @@ const FoodCardPopup = ({ show, handleCancelOnClick, item, addToCart }) => {
         }
 
         addToCart(cartItem)
+        handleCancelOnClick(); 
+        
     }
 
     return (
@@ -79,13 +81,12 @@ const FoodCardPopup = ({ show, handleCancelOnClick, item, addToCart }) => {
                             </Button>
                         ))}
                     </div>
-                            <Button className='home-button' onClick = {addToCartFunction}>Add to Cart</Button>
-                            <Button className='home-button'>Buy now</Button>
                         </div>
                     </div>
                 </section>
             </Modal.Body>
             <Modal.Footer>
+            <Button className='home-button' onClick = {addToCartFunction}>Add to Cart</Button>
                 <Button className='home-button' onClick={handleCancelOnClick}>Close</Button>
             </Modal.Footer>
         </Modal>
