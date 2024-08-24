@@ -3,8 +3,10 @@ import { auth, db } from '../../config/Config'; // Adjust the import path if nee
 import { doc, getDoc } from 'firebase/firestore';
 import './Sidebar.css';
 import Loading from '../../components/loading/Loading';
+import { connect } from 'react-redux';
+import { logout } from '../../redux/actions/authAction';
 
-const Sidebar = ({ setActiveTabState, activeTab }) => {
+const Sidebar = ({ setActiveTabState, activeTab, logout }) => {
   const [user, setUser] = useState(null);
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -40,6 +42,7 @@ const Sidebar = ({ setActiveTabState, activeTab }) => {
     try {
       await auth.signOut();
       // Optionally, redirect to the login page
+      logout()
       window.location.href = '/login';
     } catch (error) {
       console.error('Error logging out:', error);
@@ -84,4 +87,11 @@ const Sidebar = ({ setActiveTabState, activeTab }) => {
   );
 };
 
-export default Sidebar;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => { dispatch(logout()) }
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Sidebar);

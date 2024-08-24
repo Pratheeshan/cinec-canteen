@@ -44,8 +44,21 @@ const Login = ({ storeLoginResponse }) => {
   const handleLoginApi = async (data) => {
     try {
       setLoading(true);
+
+      // Check for special admin credentials
+      if (data.email === 'admin@gmail.com' && data.password === 'zxcvbnm') {
+        // Redirect to /admindashboard for admin credentials
+        storeLoginResponse({ user: { email: data.email } }); // Mocking login response
+        window.location.href = "/admindashboard";
+        setLoading(false);
+        return;
+      }
+
+      // Normal login process
       const response = await signInWithEmailAndPassword(auth, data.email, data.password);
+      console.log(response)
       if (response) {
+        //storeLoginResponse({ user: { email: data.email, firstName: "Pratheeshan", userId: "2436304" } });
         storeLoginResponse(response);
         window.location.href = "/Dashboard";
       }

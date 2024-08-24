@@ -3,8 +3,8 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Button from 'react-bootstrap/Button';
 import './OffcanvasCart.css';
 import { doc, collection, addDoc, serverTimestamp, getDocs, query, where } from 'firebase/firestore';
-import { db } from '../../config/Config'; // Import your Firebase configuration
-
+import { db, storage } from '../../config/Config'; // Import your Firebase configuration
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 import OffcanvasCartItem from './OffcanvasCartItem';
 import { connect } from 'react-redux';
@@ -14,78 +14,92 @@ import emailjs from 'emailjs-com';
 
 const OffCanvasCart = ({ show, handleClose, cartArray }) => {
   const handleCheckout = async () => {
-    if (!cartArray || cartArray.length === 0) {
-      alert("Your cart is empty");
-      return;
+  if (!cartArray || cartArray.length === 0) {
+    alert("Your cart is empty");
+    return;
+  }
+
+  const userAuthData = JSON.parse(localStorage.getItem('persist:root')).auth;
+  const user = JSON.parse(userAuthData).authResponse.user;
+  const userEmail = user.email;
+
+  try {
+    const usersRef = collection(db, 'users');
+    const q = query(usersRef, where("email", "==", userEmail));
+    const querySnapshot = await getDocs(q);
+
+    console.log("q", q)
+    console.log("querySnapshot", querySnapshot)
+
+    let userDocId = null;
+    querySnapshot.forEach((doc) => {
+      userDocId = doc.id;
+    });
+
+    if (!userDocId) {
+      throw new Error('User not found');
     }
 
-    // Get user email from local storage
-    const userAuthData = JSON.parse(localStorage.getItem('persist:root')).auth;
-    const user = JSON.parse(userAuthData).authResponse.user;
-    const userEmail = user.email;
+    const userDocRef = doc(db, 'users', userDocId);
+    const ordersRef = collection(userDocRef, 'orders');
 
-    try {
-      // Query to find the user document by email
-      const usersRef = collection(db, 'users');
-      const q = query(usersRef, where("email", "==", userEmail));
-      const querySnapshot = await getDocs(q);
+    // Assuming emails are unique, get the first matched document
+    const userDoc = querySnapshot.docs[0];
+    const userData = userDoc.data();
 
-      let userDocId = null;
+    // Extract user details from the document
+    const userName = userData.firstName; // assuming the field is `firstName`
+    const userId = userData.userId; // assuming the field is `userId`
 
-      // Assuming there is only one document per user
-      querySnapshot.forEach((doc) => {
-        userDocId = doc.id;
-      });
+    console.log("studentName:", userName);
+    console.log("userId:", userId);
 
-      if (!userDocId) {
-        throw new Error('User not found');
-      }
+    const orderData = {
+      date: serverTimestamp(),
+      status: 'Pending',
+      studentName: userName,
+      userId: userId,
+      items: cartArray.map(cartItem => ({
+        itemId: cartItem.item.id,
+        name: cartItem.item.name,
+        price: cartItem.item.price,
+        quantity: cartItem.quantity,
+        breakTimes: cartItem.breakTimes || []
+      })),
+    };
 
-      // Reference to the user's document in the users collection
-      const userDocRef = doc(db, 'users', userDocId);
+    console.log(orderData);
+    //await addDoc(ordersRef, orderData);
+    const orderDocRef = await addDoc(ordersRef, orderData);
+    const orderId = orderDocRef.id;
 
-      // Reference to the orders subcollection within the user's document
-      const ordersRef = collection(userDocRef, 'orders');
+    const persistedData = JSON.parse(localStorage.getItem('persist:root'));
+    delete persistedData.cart;
+    localStorage.setItem('persist:root', JSON.stringify(persistedData));
 
-      // Prepare order data
-      const orderData = {
-        date: serverTimestamp(), // Use server timestamp for the order date
-        status: 'Pending',
-        items: cartArray.map(cartItem => ({
-          itemId: cartItem.item.id,
-          name: cartItem.item.name,
-          price: cartItem.item.price,
-          quantity: cartItem.quantity,
-          breakTimes: cartItem.breakTimes || [] // Include selected break times
-        })),
-      };
-      console.log(cartArray)
-      // Add the order data to the orders subcollection
-      await addDoc(ordersRef, orderData);
+    const qrCodeDataURL = await generateQRCode(JSON.stringify(orderData));
+    console.log(qrCodeDataURL);
 
-      // Update local storage
-      const persistedData = JSON.parse(localStorage.getItem('persist:root'));
-      delete persistedData.cart; // Remove the cart data
-      localStorage.setItem('persist:root', JSON.stringify(persistedData)); // Update local storage
+    // Reference for the image in Firebase Storage
+    const qrCodeImageRef = ref(storage, `QR/${orderId}.png`);
 
-      // Reload the page
-      // window.location.reload();
+    // Convert dataURL to Blob for uploading
+    const response = await fetch(qrCodeDataURL);
+    const blob = await response.blob();
 
-      // Generate QR code as a Data URL
-      const qrCodeDataURL = await generateQRCode(JSON.stringify(orderData.items));
-      console.log(qrCodeDataURL)
+    await uploadBytes(qrCodeImageRef, blob);
+    let imageUrl = await getDownloadURL(qrCodeImageRef);
+    console.log(imageUrl)
 
-      const email = 'pratheeshanv@gmail.com'
-      const user_name = 'Pratheeshan'
-      // Send the email with QR code
-      sendEmailWithQRCode(user_name, email, qrCodeDataURL);
+    // const email = 'pratheeshanv@gmail.com';
+    sendEmailWithQRCode(userName, userEmail, imageUrl);
 
-      alert("Order placed successfully!");
-    } catch (error) {
-      console.error("Error placing order: ", error);
-      alert("There was an error placing your order. Please try again.");
-    }
-  };
+    alert("Order placed successfully!");
+  } catch (error) {
+    console.error("Error placing order: ", error.message || error);
+    alert("There was an error placing your order. Please try again.");
+  }
+};
 
   const generateQRCode = (text) => {
     return QRCode.toDataURL(text, { width: 256 });

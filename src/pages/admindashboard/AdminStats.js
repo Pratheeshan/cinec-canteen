@@ -1,37 +1,25 @@
-import React from 'react';
-import './AdminStats.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const AdminStats = () => {
+    const [demandPrediction, setDemandPrediction] = useState([]);
+
+    useEffect(() => {
+        const fetchDemandPrediction = async () => {
+            const response = await axios.post('http://localhost:5000/predict', { type: 'demand' });
+            setDemandPrediction(response.data.prediction);
+        };
+        fetchDemandPrediction();
+    }, []);
+
     return (
-        <div className="dash">
-            <div className="card">
-                <h2>56</h2>
-                <p className="increase">+4%</p>
-                <p>Menus</p>
-                <i className="icon">🍽️</i>
-                <div className="chart"> {/* Placeholder for chart */} </div>
-            </div>
-            <div className="card">
-                <h2>785</h2>
-                <p className="increase">+2.7%</p>
-                <p>Orders</p>
-                <i className="icon">📝</i>
-                <div className="chart"> {/* Placeholder for chart */} </div>
-            </div>
-            <div className="card">
-                <h2>56</h2>
-                <p className="decrease">-3%</p>
-                <p>Customers</p>
-                <i className="icon">👥</i>
-                <div className="chart"> {/* Placeholder for chart */} </div>
-            </div>
-            <div className="card">
-                <h2>$6231</h2>
-                <p className="decrease">-3.7%</p>
-                <p>Income</p>
-                <i className="icon">💵</i>
-                <div className="chart"> {/* Placeholder for chart */} </div>
-            </div>
+        <div>
+            <h2>Demand Prediction</h2>
+            <ul>
+                {demandPrediction.map((prediction, index) => (
+                    <li key={index}>{prediction}</li>
+                ))}
+            </ul>
         </div>
     );
 };

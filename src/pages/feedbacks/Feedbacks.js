@@ -33,7 +33,7 @@ const Feedback = () => {
     try {
       const currentDate = new Date();
       await addDoc(collection(db, 'feedbacks'), {
-        userId: userDetails.userId, // Include the student ID (userId)
+        userId: userDetails.userId,
         name: `${userDetails.firstName} ${userDetails.lastName}`,
         subject,
         feedback,
