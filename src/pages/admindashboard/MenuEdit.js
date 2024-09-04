@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { db } from '../../config/Config';
+import { db, storage } from '../../config/Config';
 import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './MenuEdit.css';
 import AddMeal from './Addmeal'; // Import the AddMeal component
 
@@ -15,7 +16,8 @@ const MenuEdit = () => {
     imageUrl: '',
     breakTime: [],
   });
-  const [isAddingNew, setIsAddingNew] = useState(false); // State for Add New mode
+  const [isAddingNew, setIsAddingNew] = useState(false);
+  const [imageFile, setImageFile] = useState(null); // State for image file
 
   useEffect(() => {
     const fetchMeals = async () => {
@@ -42,6 +44,7 @@ const MenuEdit = () => {
       imageUrl: meal.imageUrl,
       breakTime: meal.breakTime || [],
     });
+    setImageFile(null); // Reset the image file state
   };
 
   const handleInputChange = (e) => {
@@ -62,8 +65,23 @@ const MenuEdit = () => {
     }));
   };
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file); // Set the selected image file
+    }
+  };
+
   const handleSaveClick = async (id) => {
     try {
+      if (imageFile) {
+        // Upload the new image to Firebase Storage
+        const storageRef = ref(storage, `meals/${imageFile.name}`);
+        await uploadBytes(storageRef, imageFile);
+        const downloadURL = await getDownloadURL(storageRef);
+        editedMeal.imageUrl = downloadURL; // Update the imageUrl with the new URL
+      }
+
       const mealRef = doc(db, 'meals', id);
       await updateDoc(mealRef, editedMeal);
       setAllFoodItems(prev => prev.map(meal => meal.id === id ? { id, ...editedMeal } : meal));
@@ -87,7 +105,7 @@ const MenuEdit = () => {
                 <th>Description</th>
                 <th>Price</th>
                 <th>Category</th>
-                <th>Image URL</th>
+                <th>Image</th>
                 <th>Breaktime</th>
                 <th>Actions</th>
               </tr>
@@ -136,12 +154,16 @@ const MenuEdit = () => {
                         </select>
                       </td>
                       <td>
-                        <input
-                          type="text"
-                          name="imageUrl"
-                          value={editedMeal.imageUrl}
-                          onChange={handleInputChange}
-                        />
+                        <div>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageUpload}
+                          />
+                          {editedMeal.imageUrl && !imageFile && (
+                            <img src={editedMeal.imageUrl} alt="Meal" style={{ width: '100px', height: '100px' }} />
+                          )}
+                        </div>
                       </td>
                       <td>
                         <div className="break-time-group">
@@ -185,7 +207,11 @@ const MenuEdit = () => {
                       <td>{meal.description}</td>
                       <td>{meal.price}</td>
                       <td>{meal.category}</td>
-                      <td>{meal.imageUrl}</td>
+                      <td>
+                        {meal.imageUrl && (
+                          <img src={meal.imageUrl} alt="Meal" style={{ width: '100px', height: '100px' }} />
+                        )}
+                      </td>
                       <td>{meal.breakTime.join(', ')}</td>
                       <td>
                         <button onClick={() => handleEditClick(meal)}>Edit</button>

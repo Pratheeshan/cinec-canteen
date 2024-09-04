@@ -13,93 +13,107 @@ import emailjs from 'emailjs-com';
 
 
 const OffCanvasCart = ({ show, handleClose, cartArray }) => {
+  const formatOrderData = (orderData) => {
+    const { studentName, userId, items } = orderData;
+    const formattedItems = items.map(item => 
+      `- ${item.name} (ID: ${item.itemId})\n  Price: ${item.price}\n  Quantity: ${item.quantity}\n  Break Times: ${item.breakTimes.join(', ')}`
+    ).join('\n\n');
+  
+    return `
+      Name: ${studentName}
+      User ID: ${userId}
+      Items:
+      ${formattedItems}
+    `;
+  };
+
   const handleCheckout = async () => {
-  if (!cartArray || cartArray.length === 0) {
-    alert("Your cart is empty");
-    return;
-  }
-
-  const userAuthData = JSON.parse(localStorage.getItem('persist:root')).auth;
-  const user = JSON.parse(userAuthData).authResponse.user;
-  const userEmail = user.email;
-
-  try {
-    const usersRef = collection(db, 'users');
-    const q = query(usersRef, where("email", "==", userEmail));
-    const querySnapshot = await getDocs(q);
-
-    console.log("q", q)
-    console.log("querySnapshot", querySnapshot)
-
-    let userDocId = null;
-    querySnapshot.forEach((doc) => {
-      userDocId = doc.id;
-    });
-
-    if (!userDocId) {
-      throw new Error('User not found');
+    if (!cartArray || cartArray.length === 0) {
+      alert("Your cart is empty");
+      return;
     }
 
-    const userDocRef = doc(db, 'users', userDocId);
-    const ordersRef = collection(userDocRef, 'orders');
+    const userAuthData = JSON.parse(localStorage.getItem('persist:root')).auth;
+    const user = JSON.parse(userAuthData).authResponse.user;
+    const userEmail = user.email;
 
-    // Assuming emails are unique, get the first matched document
-    const userDoc = querySnapshot.docs[0];
-    const userData = userDoc.data();
+    try {
+      const usersRef = collection(db, 'users');
+      const q = query(usersRef, where("email", "==", userEmail));
+      const querySnapshot = await getDocs(q);
 
-    // Extract user details from the document
-    const userName = userData.firstName; // assuming the field is `firstName`
-    const userId = userData.userId; // assuming the field is `userId`
+      console.log("q", q)
+      console.log("querySnapshot", querySnapshot)
 
-    console.log("studentName:", userName);
-    console.log("userId:", userId);
+      let userDocId = null;
+      querySnapshot.forEach((doc) => {
+        userDocId = doc.id;
+      });
 
-    const orderData = {
-      date: serverTimestamp(),
-      status: 'Pending',
-      studentName: userName,
-      userId: userId,
-      items: cartArray.map(cartItem => ({
-        itemId: cartItem.item.id,
-        name: cartItem.item.name,
-        price: cartItem.item.price,
-        quantity: cartItem.quantity,
-        breakTimes: cartItem.breakTimes || []
-      })),
-    };
+      if (!userDocId) {
+        throw new Error('User not found');
+      }
 
-    console.log(orderData);
-    //await addDoc(ordersRef, orderData);
-    const orderDocRef = await addDoc(ordersRef, orderData);
-    const orderId = orderDocRef.id;
+      const userDocRef = doc(db, 'users', userDocId);
+      const ordersRef = collection(userDocRef, 'orders');
 
-    const persistedData = JSON.parse(localStorage.getItem('persist:root'));
-    delete persistedData.cart;
-    localStorage.setItem('persist:root', JSON.stringify(persistedData));
+      const userDoc = querySnapshot.docs[0];
+      const userData = userDoc.data();
 
-    const qrCodeDataURL = await generateQRCode(JSON.stringify(orderData));
-    console.log(qrCodeDataURL);
+      // Extract user details from the document
+      const userName = userData.firstName; 
+      const userId = userData.userId; 
 
-    // Reference for the image in Firebase Storage
-    const qrCodeImageRef = ref(storage, `QR/${orderId}.png`);
+      console.log("studentName:", userName);
+      console.log("userId:", userId);
 
-    // Convert dataURL to Blob for uploading
-    const response = await fetch(qrCodeDataURL);
-    const blob = await response.blob();
+      const orderData = {
+        date: serverTimestamp(),
+        status: 'Pending',
+        studentName: userName,
+        userId: userId,
+        items: cartArray.map(cartItem => ({
+          itemId: cartItem.item.id,
+          name: cartItem.item.name,
+          price: cartItem.item.price,
+          quantity: cartItem.quantity,
+          breakTimes: cartItem.breakTimes || []
+        })),
+      };
 
-    await uploadBytes(qrCodeImageRef, blob);
-    let imageUrl = await getDownloadURL(qrCodeImageRef);
-    console.log(imageUrl)
+      console.log(orderData);
+      //await addDoc(ordersRef, orderData);
+      const orderDocRef = await addDoc(ordersRef, orderData);
+      const orderId = orderDocRef.id;
 
-    // const email = 'pratheeshanv@gmail.com';
-    sendEmailWithQRCode(userName, userEmail, imageUrl);
+      const persistedData = JSON.parse(localStorage.getItem('persist:root'));
+      delete persistedData.cart;
+      localStorage.setItem('persist:root', JSON.stringify(persistedData));
+      
+      const formattedOrderData = formatOrderData(orderData);
+      const qrCodeDataURL = await generateQRCode(formattedOrderData);
+      console.log(qrCodeDataURL);
 
-    alert("Order placed successfully!");
-  } catch (error) {
-    console.error("Error placing order: ", error.message || error);
-    alert("There was an error placing your order. Please try again.");
-  }
-};
+      // Reference for the image in Firebase Storage
+      const qrCodeImageRef = ref(storage, `QR/${orderId}.png`);
+
+      // Convert dataURL to Blob for uploading
+      const response = await fetch(qrCodeDataURL);
+      const blob = await response.blob();
+
+      await uploadBytes(qrCodeImageRef, blob);
+      let imageUrl = await getDownloadURL(qrCodeImageRef);
+      console.log(imageUrl)
+
+      // const email = 'pratheeshanv@gmail.com';
+      sendEmailWithQRCode(userName, userEmail, imageUrl);
+
+      alert("Order placed successfully!");
+    } catch (error) {
+      console.error("Error placing order: ", error.message || error);
+      alert("There was an error placing your order. Please try again.");
+    }
+  };
 
   const generateQRCode = (text) => {
     return QRCode.toDataURL(text, { width: 256 });
