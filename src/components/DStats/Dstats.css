@@ -93,9 +93,9 @@ p {
   padding: 20px;
   border-radius: 5px;
   box-shadow: 2px 2px 8px 2px rgba(14, 28, 60, 0.1);
+  height: fit-content;
 }
 .chart-container {
-  width: 270px; /* Adjust the width as needed */
   margin-bottom: 20px;
 }
 .item {
@@ -146,7 +146,7 @@ p {
 }
 .personal-chart{
   background: white;
-    padding: 20px;
+  padding-top: 20px;
     border-radius: 5px;
     box-shadow: 2px 2px 8px 2px rgba(14, 28, 60, 0.1);
 }

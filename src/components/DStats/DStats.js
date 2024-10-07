@@ -18,34 +18,34 @@ const DStats = ({ authResponse }) => {
     const [weeklySpending, setWeeklySpending] = useState([]);
     const [monthlySpending, setMonthlySpending] = useState([]);
 
-    const lineData = {
-        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-        datasets: [
-            {
-                label: 'Orders Over Time',
-                data: [5, 10, 15, 20],
-                fill: false,
-                borderColor: '#36A2EB',
-                backgroundColor: '#36A2EB',
-                tension: 0.1,
-            },
-        ],
-    };
+    // const lineData = {
+    //     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+    //     datasets: [
+    //         {
+    //             label: 'Orders Over Time',
+    //             data: [5, 10, 15, 20],
+    //             fill: false,
+    //             borderColor: '#36A2EB',
+    //             backgroundColor: '#36A2EB',
+    //             tension: 0.1,
+    //         },
+    //     ],
+    // };
 
-    const series = [{
-        name: "Desktops",
-        data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-    }]
+    // const series = [{
+    //     name: "Desktops",
+    //     data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+    // }]
 
-    const options = {
-        chart: {
-            height: 350,
-            type: 'line',
-            zoom: {
-                enabled: false
-            }
-        }
-    }
+    // const options = {
+    //     chart: {
+    //         height: 350,
+    //         type: 'line',
+    //         zoom: {
+    //             enabled: false
+    //         }
+    //     }
+    // }
 
     useEffect(() => {
         const fetchAllOrders = async () => {
@@ -119,6 +119,11 @@ const DStats = ({ authResponse }) => {
 
                 const monthlySpending = await calculateMonthlySpending(userOrders);
                 console.log("monthlySpending:", monthlySpending);
+                setMonthlySpending(monthlySpending)
+
+                const weeklySpending = await calculateWeeklySpending(userOrders);
+                console.log("weeklySpending:", weeklySpending);
+                setWeeklySpending(weeklySpending)
 
                 // Send orders to Python model for personalized recommendations
                 const personalizedPredictions = await getPersonalizedPredictions(userOrders);
@@ -150,6 +155,7 @@ const DStats = ({ authResponse }) => {
                 }
             });
         };
+        
         const fetchImagesForPersonalPredictions = async (predictions) => {
             try {
                 const mealsRef = collection(db, 'meals');
@@ -236,6 +242,7 @@ const DStats = ({ authResponse }) => {
 
         const calculateMonthlySpending = async (orders) => {
             try {
+                console.log("calculateMonthlySpending orders: ", orders)
                 const response = await fetch('http://localhost:5000/monthly-spent', {
                     method: 'POST',
                     headers: {
@@ -249,7 +256,32 @@ const DStats = ({ authResponse }) => {
                 }
 
                 const spending = await response.json();
-                console.log(spending)
+                console.log("spending", spending)
+                return spending
+            } catch (error) {
+                console.error("Error fetching predictions:", error.message);
+                return [];
+            }
+        };
+
+        const calculateWeeklySpending = async (orders) => {
+            try {
+                console.log("calculateMonthlySpending orders: ", orders)
+                const response = await fetch('http://localhost:5000/weekly-spent', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(orders),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const spending = await response.json();
+                console.log("spending", spending)
+                return spending
             } catch (error) {
                 console.error("Error fetching predictions:", error.message);
                 return [];
@@ -267,33 +299,33 @@ const DStats = ({ authResponse }) => {
             {
                 label: '# of Orders',
                 data: predictions.map(prediction => prediction.count),
-                backgroundColor: ['#0e1c3c', '#36A2EB', '#ffa456', '#4BC0C0'], // Customize as needed
+                backgroundColor: ['#0e1c3c', '#36A2EB', '#ffa456', '#4BC0C0'], 
                 hoverBackgroundColor: ['#0e1c3cdb', '#36a2ebeb', '#ffa456f0', '#4bc0c0e3'],
             },
         ],
     };
 
     // Prepare data for Donut chart
-    const calculateWeeklySpending = (orders) => {
-        const now = new Date();
-        const spending = [];
+    // const calculateWeeklySpending = (orders) => {
+    //     const now = new Date();
+    //     const spending = [];
 
-        // Initialize array for the last 4 weeks
-        for (let i = 0; i < 4; i++) {
-            spending.push({ week: `Week ${i + 1}`, total: 0 });
-        }
+    //     // Initialize array for the last 4 weeks
+    //     for (let i = 0; i < 4; i++) {
+    //         spending.push({ week: `Week ${i + 1}`, total: 0 });
+    //     }
 
-        orders.forEach(order => {
-            const orderDate = order.date.toDate();
-            const weekDifference = Math.floor((now - orderDate) / (7 * 24 * 60 * 60 * 1000));
+    //     orders.forEach(order => {
+    //         const orderDate = order.date.toDate();
+    //         const weekDifference = Math.floor((now - orderDate) / (7 * 24 * 60 * 60 * 1000));
 
-            if (weekDifference < 4) {
-                spending[3 - weekDifference].total += parseFloat(order.items.reduce((sum, item) => sum + item.price * item.quantity, 0));
-            }
-        });
+    //         if (weekDifference < 4) {
+    //             spending[3 - weekDifference].total += parseFloat(order.items.reduce((sum, item) => sum + item.price * item.quantity, 0));
+    //         }
+    //     });
 
-        return spending.map(item => item.total);
-    };
+    //     return spending.map(item => item.total);
+    // };
 
     const weeklySeries = [{
         name: "Weekly Spending",
@@ -308,13 +340,13 @@ const DStats = ({ authResponse }) => {
     const chartOptions = {
         chart: {
             type: 'line',
-            height: 350,
+            height: 250,
             zoom: {
                 enabled: false
             }
         },
         xaxis: {
-            categories: ['Week 1', 'Week 2', 'Week 3', 'Week 4'], // or ['Month 1', 'Month 2', 'Month 3', 'Month 4']
+            categories: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
         },
         stroke: {
             curve: 'smooth'
@@ -363,11 +395,11 @@ const DStats = ({ authResponse }) => {
                 <div className='personal-chart'>
                         <div className='chart-container'>
                             <h2>Weekly Spending</h2>
-                            <ReactApexChart options={{ ...chartOptions, xaxis: { categories: ['Week 1', 'Week 2', 'Week 3', 'Week 4'] } }} series={weeklySeries} type="line" height={180} />
+                            <ReactApexChart options={{ ...chartOptions, xaxis: { categories: ['Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'] } }} series={weeklySeries} type="line" height={180} />
                         </div>
                         <div className='chart-container'>
                             <h2>Monthly Spending</h2>
-                            <ReactApexChart options={{ ...chartOptions, xaxis: { categories: ['Month 1', 'Month 2', 'Month 3', 'Month 4'] } }} series={monthlySeries} type="line" height={180} />
+                            <ReactApexChart options={{ ...chartOptions, xaxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] } }} series={monthlySeries} type="line" height={180} />
                         </div>
 
                     </div>

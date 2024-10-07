@@ -110,10 +110,6 @@
   line-height: 1;
 }
 
-.feature-card:hover{
-  background-color: #fff;
-  box-shadow: 0 10px 30px 0 rgb(14 28 60 / .1)
-}
 
 /* create account */
 .account-info h2 {

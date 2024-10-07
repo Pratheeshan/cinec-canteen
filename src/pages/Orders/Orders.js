@@ -51,7 +51,7 @@ const Orders = () => {
         console.error("Error fetching orders: ", error);
       }
     };
-    
+
 
     fetchOrders();
   }, []); // Empty dependency array means this useEffect runs once when the component mounts
@@ -84,7 +84,13 @@ const Orders = () => {
     return (
       <tr>
         <td>{order.date.toDate().toLocaleDateString()}</td>
-        <td>{order.items.map(item => item.name).join(', ')}</td>
+        <td>
+          {order.items.map((item, index) => (
+            <div key={index}>{item.name}</div>
+          ))}
+          {order.items.length === 0 && <div>No items</div>}
+        </td>
+
         <td>
           {order.items.flatMap(item => item.breakTimes || [])
             .map((breakTime, index) => (
